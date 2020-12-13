@@ -1,0 +1,9 @@
+####
+# emToile
+#
+# IDE helper file
+#
+# KEYWORD1 - classes
+# KEYWORD2 - function
+# LITERAL1 - defile
+####
