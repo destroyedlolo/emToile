@@ -27,10 +27,9 @@ public:
 
 	/*	set position as a tile
 	 * 	lv_point_t pos
+	 *
+	 * 	CAUTION : works only if the tile has the size of its tileview
 	 */
-	void setTilePos( lv_point_t pos ){
-		this->setPosXY( pos.x * LV_HOR_RES, pos.y * LV_VER_RES );
-	}
+	void setTilePos( lv_point_t pos );
 };
-
 #endif
