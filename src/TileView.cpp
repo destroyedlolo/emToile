@@ -1,5 +1,5 @@
 /************************************************
-*	Tileview : grid of tiles
+*	TileView : grid of tiles
 *************************************************/
 
 #include "TileView.h"
