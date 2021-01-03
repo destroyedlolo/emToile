@@ -21,6 +21,27 @@ public:
 		this->_obj = lv_page_create( parent, cloned );
 	}
 
+	/* As page can be created by 'externals' we need this default constructor
+	 * which is creating an invalid object.
+	 * CAUTION : using it as it is will wake up the Guru ! You've been warned
+	 * initFromExternal() has to be called first
+	 */
+	Page(){
+		this->_obj = NULL;
+	}
+	void initFromExternal(lv_obj_t *p){
+		this->_obj = p;
+	}
+
+	/* last but not least, this one initialize the object from an already
+	 * existing LVGL one.
+	 * -> lv_obj_t * p : pointer to an lvgl's page
+	 * -> boot fake : only to differentiate against the 1st constructor
+	 */
+	Page( lv_obj_t *p, bool ){
+		this->_obj = p;
+	}
+
 	/* Set anim time
 	 * -> uint16_t time in ms
 	 */
