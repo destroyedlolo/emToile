@@ -14,16 +14,18 @@ public:
 	 *  	if not null, its style is copied
 	 * -> const lv_obj_t *cloned : copy from this object (default : NULL)
 	 */
-	Label( Container *parent=NULL, Container *cloned=NULL ){
+	Label( lv_obj_t *parent=NULL, const lv_obj_t *cloned=NULL ){
+		this->_obj = lv_label_create( parent, cloned );
+	}
+
+	Label( Container *parent, Container *cloned=NULL ){
 		this->_obj = lv_label_create( 
 			parent ? parent->getMyself() : NULL, 
 			cloned ? cloned->getMyself() : NULL
 		);
 
-		if(parent){
-			this->copyStyle( parent->getStyle() );
-			this->applyStyle();
-		}
+		this->copyStyle( parent->getStyle() );
+		this->applyStyle();
 	}
 
 		/* Set text
