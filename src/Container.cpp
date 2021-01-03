@@ -28,6 +28,5 @@ Container::Container( TileView *parent, TileView *cloned ){
 }
 
 void Container::setTilePos( lv_point_t pos ){
-	lv_obj_t *p = lv_obj_get_parent( this->getMyself() );
 	this->setPosXY( pos.x * lv_obj_get_width(this->getMyself()), pos.y * lv_obj_get_height(this->getMyself()) );
 }
