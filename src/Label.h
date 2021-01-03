@@ -35,11 +35,22 @@ public:
 		lv_label_set_text( this->getMyself(), text );
 	}
 
+	void setTextStatic( const char *text ){
+		lv_label_set_text_static( this->getMyself(), text );
+	}
+
+		/* Enable recoloring
+		 * -> bool : true or false depending if you want to recolor
+		 */
+	void setReColor( bool en ){
+		lv_label_set_recolor( this->getMyself(), en );
+	}
+
 		/* Set long text mode
 		 * -> lv_label_long_mode_t mode
 		 *  see : https://docs.lvgl.io/latest/en/html/widgets/label.html
 		 */
-	void SetLongTextMode( lv_label_long_mode_t mode ){
+	void setLongTextMode( lv_label_long_mode_t mode ){
 		lv_label_set_long_mode( this->getMyself(), mode );
 	}
 };
