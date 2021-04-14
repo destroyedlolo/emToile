@@ -15,23 +15,13 @@ public:
 	 * -> const Container *cloned : copy from this object (default : NULL)
 	 */
 	MsgBox( Container *parent, Container *cloned=NULL ){
-		this->_obj = lv_img_create( 
+		this->_obj = lv_msgbox_create( 
 			parent ? parent->getMyself() : NULL, 
 			cloned ? cloned->getMyself() : NULL
 		);
 
 		if(parent)
 			this->copyStyle( parent->getStyle() );
-	}
-
-	/* Set MessageBox's text
-	 * -> const char *text - what to display.
-	 *
-	 *  Notez-bien : the text will be copied locally, so the parameter can be 
-	 *  a local variable.
-	 */
-	void setText( const char *text ){
-		lv_msgbox_set_text( this->getMyself(), text );
 	}
 
 	/* Init the message box
@@ -47,6 +37,16 @@ public:
 			lv_msgbox_set_anim_time( this->getMyself(), anim );
 	}
 
+	/* Set MessageBox's text
+	 * -> const char *text - what to display.
+	 *
+	 *  Notez-bien : the text will be copied locally, so the parameter can be 
+	 *  a local variable.
+	 */
+	void setText( const char *text ){
+		lv_msgbox_set_text( this->getMyself(), text );
+	}
+
 	/* get lastly activated button ID
 	 *	<- uint16_t : button's ID (starting with 0)
 	 */
@@ -59,6 +59,19 @@ public:
 	 */
 	const char *getActiveButtonText( void ){
 		return lv_msgbox_get_active_btn_text( this->getMyself() );
+	}
+
+	/* Close automatically the message box
+	 *	-> uint16_t : delay in milliseconds before the MsgBox will be closed
+	 */
+	void AutoClose( uint16_t delay ){
+		lv_msgbox_start_auto_close( this->getMyself(), delay );
+	}
+
+	/* Cancel AutoClose attempt
+	 */
+	void CancelAutoClose( void ){
+		lv_msgbox_stop_auto_close( this->getMyself() );
 	}
 };
 
