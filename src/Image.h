@@ -45,11 +45,18 @@ public:
 		lv_img_set_src( this->_obj, src );
 	}
 
+	/* set image recolor intensity
+	 * -> uint32_t : intensity value (default : LV_OPA_COVER )
+	 */
+	void setIntensity( uint32_t intense=LV_OPA_COVER ){
+		lv_obj_set_style_local_image_recolor_opa(this->getMyself(), LV_IMG_PART_MAIN, LV_STATE_DEFAULT, intense);
+	}
+
 	/* recolor image's color
 	 *	-> lv_color_t color : new image color
 	 */
 	void Recolor( lv_color_t color ){
-		lv_style_set_image_recolor( this->getStyle(), LV_OBJ_PART_MAIN, color );
+		lv_style_set_image_recolor( this->getStyle(), LV_IMG_PART_MAIN, color );
 		this->applyStyle();
 	}
 };
