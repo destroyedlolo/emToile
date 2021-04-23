@@ -135,6 +135,18 @@ public:
 	}
 
 
+	/* Set padding (locally to the object)
+	 * -> pad : all directions
+	 * -> h,v: horizontal and vertical
+	 * -> top,bottom,left,right
+	 * -> uint8_t part (only if 4 padding provided)
+	 */
+	void setPadding( lv_style_int_t pad ) { this->setPadding( pad, pad, pad, pad ); };
+	void setPadding( lv_style_int_t h, lv_style_int_t v) { this->setPadding( h, h, v, v ); };
+	void setPadding( lv_style_int_t top, lv_style_int_t bottom, lv_style_int_t left, lv_style_int_t right, uint8_t part=LV_OBJ_PART_MAIN );
+
+	void setInnerPadding( lv_style_int_t pad, uint8_t part=LV_OBJ_PART_MAIN );
+
 	/***
 	 * Misc
 	 ***/

@@ -22,6 +22,17 @@ void GfxObject::Align( lv_align_t align, Image *base, lv_coord_t x_mod, lv_coord
 	lv_obj_align( this->getMyself(), base->getMyself(), align, x_mod, y_mod );
 }
 
+void GfxObject::setPadding( lv_style_int_t top, lv_style_int_t bottom, lv_style_int_t left, lv_style_int_t right, uint8_t part ){
+	lv_obj_set_style_local_pad_top(this->getMyself(), part, LV_STATE_DEFAULT, top);
+	lv_obj_set_style_local_pad_bottom(this->getMyself(), part, LV_STATE_DEFAULT, bottom);
+	lv_obj_set_style_local_pad_left(this->getMyself(), part, LV_STATE_DEFAULT, left);
+	lv_obj_set_style_local_pad_right(this->getMyself(), part, LV_STATE_DEFAULT, right);
+}
+
+void GfxObject::setInnerPadding( lv_style_int_t pad, uint8_t part ){
+	lv_obj_set_style_local_pad_inner(this->getMyself(), part, LV_STATE_DEFAULT, pad);
+}
+
 void GfxObject::dumpObj( const char *name ){
 	if( name )
 		Serial.print( name );
