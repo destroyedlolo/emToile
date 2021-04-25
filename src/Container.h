@@ -25,6 +25,28 @@ public:
 	Container( Container *parent, Container *cloned=NULL );
 	Container( TileView *parent, TileView *cloned=NULL );
 
+	/* Set layout policy
+	 * lv_layout_t layout
+	 */
+	void setLayout( lv_layout_t layout ){
+		lv_cont_set_layout( this->getMyself(), layout );
+	}
+
+	/* Set the fit policy
+	 *	-> lv_fit_t all : policy in all directions
+	 *	-> lv_fit_t hor,ver
+	 *	-> lv_fit_t left, right, top, bottom
+	 */
+	void setFit( lv_fit_t all ){
+		lv_cont_set_fit( this->getMyself(), all );
+	}
+	void setFit( lv_fit_t hor, lv_fit_t ver ){
+		lv_cont_set_fit2( this->getMyself(), hor, ver );
+	}
+	void setFit( lv_fit_t left, lv_fit_t right, lv_fit_t top, lv_fit_t bottom ){
+		lv_cont_set_fit4( this->getMyself(), left, right, top, bottom );
+	}
+
 	/*	set position as a tile
 	 * 	lv_point_t pos
 	 *
