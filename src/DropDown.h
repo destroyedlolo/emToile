@@ -18,7 +18,7 @@ public:
 		this->_obj = lv_dropdown_create( parent, cloned );
 	}
 
-	DropDown( Container *parent, Container *cloned=NULL ){
+	DropDown( Container *parent, DropDown *cloned=NULL ){
 		this->_obj = lv_dropdown_create( 
 			parent->getMyself(), 
 			cloned ? cloned->getMyself() : NULL
