@@ -30,7 +30,7 @@ public:
 
 	Image( Container *parent, Container *cloned=NULL ){
 		this->_obj = lv_img_create( 
-			parent ? parent->getMyself() : NULL, 
+			parent->getMyself(), 
 			cloned ? cloned->getMyself() : NULL
 		);
 

@@ -20,7 +20,7 @@ public:
 
 	Label( Container *parent, Container *cloned=NULL ){
 		this->_obj = lv_label_create( 
-			parent ? parent->getMyself() : NULL, 
+			parent->getMyself(), 
 			cloned ? cloned->getMyself() : NULL
 		);
 
