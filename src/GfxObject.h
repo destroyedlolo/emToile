@@ -23,6 +23,10 @@ public:
 	virtual lv_obj_t *getMyself( void ){ return this->_obj; }
 	lv_obj_t *operator*(){ return this->getMyself(); }
 
+	virtual ~GfxObject(){
+		lv_obj_del( this->_obj );
+	}
+
 	/***
 	 * Position related
 	 *
