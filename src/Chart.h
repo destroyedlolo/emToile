@@ -1,5 +1,8 @@
 /************************************************
 *	Chart : Display data charts
+*
+*	Notez-bien : without call of setRange(), the
+*		default min/max are 0, 100
 *************************************************/
 #ifndef CHART_H
 #define CHART_H
@@ -11,12 +14,13 @@ public:
 
 	class Serie {
 		lv_obj_t *_chart;
+		lv_chart_axis_t _axis;
 
 	protected:
 		lv_chart_series_t *_dt;
 
 	public:
-		Serie( lv_obj_t *chart, lv_color_t color ) : _chart(chart) {
+		Serie( lv_obj_t *chart, lv_color_t color ) : _chart(chart), _axis(LV_CHART_AXIS_PRIMARY_Y) {
 			this->_dt = lv_chart_add_series( chart, color );
 		}
 
@@ -102,20 +106,65 @@ public:
 		 * lv_chart_axis_t axis : LV_CHART_AXIS_PRIMARY_Y or LV_CHART_AXIS_SECONDARY_Y
 		 */
 		void setAxis( lv_chart_axis_t axis ){
+			this->_axis = axis;
 			lv_chart_set_series_axis( this->_chart, this->_dt, axis );
 		}
 		lv_chart_axis_t getAxis( void ){
 			return lv_chart_get_series_axis( this->_chart, this->_dt );
 		}
+
+		/* Set vertical range
+		 *
+		 * lv_coord_t ymin : min value
+		 * lv_coord_t ymax : max value
+		 *
+		 * If needed, the axis must be set BEFORE !
+		 */
+		void setRange( lv_coord_t ymin, lv_coord_t ymax ){
+			lv_chart_set_y_range( this->_chart, this->_axis, ymin, ymax );
+		}
 	};
 
 	/* Char constructor
+	 *
+	 * -> uint16_t nber : number of points in the chart
 	 * -> lv_obj_t *parent : parent object (default : NULL)
 	 * -> const lv_obj_t *cloned : copy from this object (default : NULL)
+	 * -> lv_chart_type_t type (default : LV_CHART_TYPE_LINE)
 	 */
-	Chart( lv_obj_t *parent=NULL, const lv_obj_t *cloned=NULL ){
+	Chart( 
+		uint16_t nber,
+		lv_obj_t *parent=NULL, const lv_obj_t *cloned=NULL,
+		lv_chart_type_t type = LV_CHART_TYPE_LINE
+	){
 		this->_obj = lv_chart_create( parent, cloned );
+		lv_chart_set_point_count( this->_obj, nber );
+		lv_chart_set_type( this->_obj, type );
 	}
-	
+
+	/* Add a new serie of data
+	 *
+	 * lv_color_t color
+	 */
+	Serie *addSerie( lv_color_t color ){
+		return new Serie( this->getMyself(), color );
+	}
+
+	/* Number of division lines
+	 *
+	 * uint8_t hdiv : horizontal ones
+	 * uint8_t vdiv : vertical ones
+	 */
+	void divLines( uint8_t hdiv, uint8_t vdiv ){
+		lv_chart_set_div_line_count( this->getMyself(), hdiv, vdiv );
+	}
+
+	/* Refresh the chart 
+	 * (useful in case a serie has been directly updated)
+	 */
+	void Refresh( void ){
+		lv_chart_refresh( this->getMyself() );
+	}
+
 };
 #endif
