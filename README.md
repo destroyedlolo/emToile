@@ -11,6 +11,14 @@ Clone this repository in your **Arduino IDE libraries** directory (i.e. ``~/Ardu
 
 Each header file is an implementation of an Lvgl object and contains related usage documentation.
 
+## Major changes
+
+### Legacy -> main
+
+In this branch, GfxObject doesn't depend anymore on Style.
+- The drawback is style have to be EXPLICITELY applied to objected.
+- The advantages are it's more ressources efficient, flexible and follow LGVL way of working
+
 ---
 
 [Toile](https://github.com/destroyedlolo/Toile) is a framework to build GUIs on Unix system using **Lua**. **emToile** has the same goal for embedded systems but not using Lua. It's why I choose the change sightly the name and create a dedicated directory.
