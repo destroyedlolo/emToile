@@ -1,6 +1,9 @@
 # emToile
 Lvgl based framework to build GUI on **Arduino IDE** compatible embedded systems
 
+**This LEGACY branch is now obsolete** : the main branch contains redesigned version which is more more economical and efficiant compared to this one.
+Legacy branch is still here for maintenance reason but will not be updated as soon as the main one is stable enough.
+
 ## installation
 
 Clone this repository in your **Arduino IDE libraries** directory (i.e. ``~/Arduino/libraries``)
