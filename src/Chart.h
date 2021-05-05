@@ -166,5 +166,26 @@ public:
 		lv_chart_refresh( this->getMyself() );
 	}
 
+	/* Set update mode
+	 *
+	 * -> lv_chart_update_mode_t update_mode
+	 */
+	void setUpdateMode( lv_chart_update_mode_t update_mode ){
+		lv_chart_set_update_mode( this->getMyself(), update_mode );
+	}
+
+	/* set the length of the tick marks on the x axis
+	 *
+	 * -> uint8_t major_tick_len
+	 * -> uint8_t minor_tick_len
+	 *  	default in both cases : LV_CHART_TICK_LENGTH_AUTO
+	 */
+	void setTickLenX( 
+		uint8_t major_tick_len = LV_CHART_TICK_LENGTH_AUTO, 
+		uint8_t minor_tick_len = LV_CHART_TICK_LENGTH_AUTO
+	){
+		lv_chart_set_x_tick_length( this->getMyself(), major_tick_len, minor_tick_len );
+	}
+
 };
 #endif
