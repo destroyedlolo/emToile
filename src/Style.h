@@ -42,6 +42,22 @@ public:
 		lv_style_reset( &this->_style );
 	}
 
+	/* Set text color
+	 * -> lv_color_t color
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 */
+	void setTextColor( lv_color_t color, uint8_t part=LV_OBJ_PART_MAIN ){
+		lv_style_set_text_color( &this->_style, part, color );
+	}
+
+	/* Set text opacity
+	 * -> uint8_t value
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 */
+	void setTextOpacity( uint8_t value, uint8_t part=LV_OBJ_PART_MAIN ){
+		lv_style_set_text_opa( &this->_style, part, value );
+	}
+
 	/* Set text font
 	 * -> lv_font_t *font : font to use
 	 * -> int state (default : LV_STATE_DEFAULT)
@@ -50,12 +66,12 @@ public:
 		lv_style_set_text_font( &this->_style, state, font );
 	}
 
-	/* Set text color
-	 * -> lv_color_t color
-	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	/* Set text decoration
+	 * -> lv_text_decor_t decoration
+	 * -> int state (default : LV_STATE_DEFAULT)
 	 */
-	void setTextColor( lv_color_t color, uint8_t part=LV_OBJ_PART_MAIN ){
-		lv_style_set_text_color( &this->_style, part, color );
+	void setTextDecoration( lv_text_decor_t decoration, int state=LV_STATE_DEFAULT ){
+		lv_style_set_text_decor( &this->_style, state, decoration );
 	}
 
 	/* Image recolor
