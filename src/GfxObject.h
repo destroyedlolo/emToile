@@ -140,6 +140,22 @@ public:
 		lv_obj_add_style( this->getMyself(), part, *style );
 	}
 
+	/* Reset the given part's style
+	 * -> uint8_t part : which part to reset (LV_OBJ_PART_MAIN)
+	 */
+	void resetStyle( uint8_t part=LV_OBJ_PART_MAIN ){
+		lv_obj_reset_style_list( this->getMyself(), part );
+	}
+
+	/* Refresh the object as per its styles values
+	 * (for example if a style has changed)
+	 * -> uint8_t part : which part to refresh (default : all)
+	 * -> uint8_t properties : properties to refresh (default : all)
+	 */
+	void refreshStyle( uint8_t part = LV_OBJ_PART_ALL, uint8_t properties = LV_STYLE_PROP_ALL ){
+		lv_obj_refresh_style( this->getMyself(), part, properties );
+	}
+
 	/* Set font
 	 *
 	 * -> lv_font_t *font : font to use
@@ -150,17 +166,29 @@ public:
 		lv_obj_set_style_local_text_font( this->getMyself(), part, state, font );
 	}
 
-	/* Set padding (locally to the object)
+	/* Set padding 
 	 * -> pad : all directions
 	 * -> h,v: horizontal and vertical
 	 * -> top,bottom,left,right
 	 * -> uint8_t part (only if 4 padding provided)
+	 * -> int state (default : LV_STATE_DEFAULT)
 	 */
 	void setPadding( lv_style_int_t pad ) { this->setPadding( pad, pad, pad, pad ); };
 	void setPadding( lv_style_int_t h, lv_style_int_t v) { this->setPadding( h, h, v, v ); };
-	void setPadding( lv_style_int_t top, lv_style_int_t bottom, lv_style_int_t left, lv_style_int_t right, uint8_t part=LV_OBJ_PART_MAIN );
+	void setPadding( lv_style_int_t top, lv_style_int_t bottom, lv_style_int_t left, lv_style_int_t right, uint8_t part=LV_OBJ_PART_MAIN, int state=LV_STATE_DEFAULT );
 
-	void setInnerPadding( lv_style_int_t pad, uint8_t part=LV_OBJ_PART_MAIN );
+	void setInnerPadding( lv_style_int_t pad, uint8_t part=LV_OBJ_PART_MAIN, int state=LV_STATE_DEFAULT );
+
+	/* Set margin 
+	 * -> pad : all directions
+	 * -> h,v: horizontal and vertical
+	 * -> top,bottom,left,right
+	 * -> uint8_t part (only if 4 margin provided)
+	 * -> int state (default : LV_STATE_DEFAULT)
+	 */
+	void setMargin( lv_style_int_t pad ) { this->setMargin( pad, pad, pad, pad ); };
+	void setMargin( lv_style_int_t h, lv_style_int_t v) { this->setMargin( h, h, v, v ); };
+	void setMargin( lv_style_int_t top, lv_style_int_t bottom, lv_style_int_t left, lv_style_int_t right, uint8_t part=LV_OBJ_PART_MAIN, int state=LV_STATE_DEFAULT );
 
 	/***
 	 * Misc

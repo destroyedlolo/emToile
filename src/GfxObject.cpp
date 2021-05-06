@@ -27,15 +27,22 @@ void GfxObject::Align( lv_align_t align, DropDown *base, lv_coord_t x_mod, lv_co
 	lv_obj_align( this->getMyself(), base->getMyself(), align, x_mod, y_mod );
 }
 
-void GfxObject::setPadding( lv_style_int_t top, lv_style_int_t bottom, lv_style_int_t left, lv_style_int_t right, uint8_t part ){
-	lv_obj_set_style_local_pad_top(this->getMyself(), part, LV_STATE_DEFAULT, top);
-	lv_obj_set_style_local_pad_bottom(this->getMyself(), part, LV_STATE_DEFAULT, bottom);
-	lv_obj_set_style_local_pad_left(this->getMyself(), part, LV_STATE_DEFAULT, left);
-	lv_obj_set_style_local_pad_right(this->getMyself(), part, LV_STATE_DEFAULT, right);
+void GfxObject::setPadding( lv_style_int_t top, lv_style_int_t bottom, lv_style_int_t left, lv_style_int_t right, uint8_t part, int state ){
+	lv_obj_set_style_local_pad_top(this->getMyself(), part, state, top);
+	lv_obj_set_style_local_pad_bottom(this->getMyself(), part, state, bottom);
+	lv_obj_set_style_local_pad_left(this->getMyself(), part, state, left);
+	lv_obj_set_style_local_pad_right(this->getMyself(), part, state, right);
 }
 
-void GfxObject::setInnerPadding( lv_style_int_t pad, uint8_t part ){
-	lv_obj_set_style_local_pad_inner(this->getMyself(), part, LV_STATE_DEFAULT, pad);
+void GfxObject::setInnerPadding( lv_style_int_t pad, uint8_t part, int state ){
+	lv_obj_set_style_local_pad_inner(this->getMyself(), part, state, pad);
+}
+
+void GfxObject::setMargin( lv_style_int_t top, lv_style_int_t bottom, lv_style_int_t left, lv_style_int_t right, uint8_t part, int state ){
+	lv_obj_set_style_local_margin_top(this->getMyself(), part, state, top);
+	lv_obj_set_style_local_margin_bottom(this->getMyself(), part, state, bottom);
+	lv_obj_set_style_local_margin_left(this->getMyself(), part, state, left);
+	lv_obj_set_style_local_margin_right(this->getMyself(), part, state, right);
 }
 
 void GfxObject::dumpObj( const char *name ){
