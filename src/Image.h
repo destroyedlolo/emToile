@@ -33,9 +33,6 @@ public:
 			parent->getMyself(), 
 			cloned ? cloned->getMyself() : NULL
 		);
-
-		if(parent)
-			this->copyStyle( parent->getStyle() );
 	}
 
 	/* set the image content
@@ -56,8 +53,7 @@ public:
 	 *	-> lv_color_t color : new image color
 	 */
 	void Recolor( lv_color_t color ){
-		lv_style_set_image_recolor( this->getStyle(), LV_IMG_PART_MAIN, color );
-		this->applyStyle();
+		lv_obj_set_style_local_image_recolor(this->getMyself(), LV_IMG_PART_MAIN, LV_STATE_DEFAULT, color);
 	}
 };
 #endif

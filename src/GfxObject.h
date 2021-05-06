@@ -6,16 +6,16 @@
 #ifndef GFXOBJ_H
 #define GFXOBJ_H
 
-#include <lvgl/lvgl.h>
-
 #include "Style.h"
+
+#include <lvgl/lvgl.h>
 
 class Container;
 class Label;
 class Image;
 class DropDown;
 
-class GfxObject : public Style {
+class GfxObject {
 protected:
 	lv_obj_t 	*_obj;
 
@@ -128,16 +128,16 @@ public:
 	 * Style related
 	 ***/
 
-	/* Apply localy stored style
+	/* Apply a style
+	 * -> Style &style : the style to apply
 	 * -> uint8_t part : which part to update (LV_OBJ_PART_MAIN)
 	 *
 	 * NOTEZ-BIEN :
 	 * 		Ignored if the derived class' getMyself() returns
 	 *		something different than NULL
 	 */
-	void applyStyle( uint8_t part=LV_OBJ_PART_MAIN ){
-		if( this->getMyself() )
-			lv_obj_add_style( this->getMyself(), part, &this->_style );
+	void applyStyle( Style &style, uint8_t part=LV_OBJ_PART_MAIN ){
+		lv_obj_add_style( this->getMyself(), part, *style );
 	}
 
 

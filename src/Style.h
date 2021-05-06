@@ -26,6 +26,9 @@ public:
 	lv_style_t *getStyle( void ){
 		return( &this->_style );
 	}
+	lv_style_t *operator *( void ){
+		return( &this->_style );
+	}
 
 	/* Copy a style to local one
 	 * -> lv_style_t *style : original style to copy from
