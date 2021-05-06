@@ -193,6 +193,55 @@ public:
 		lv_style_set_shadow_spread( &this->_style, part, value );
 	}
 
+	/* Set caption string (value in LGVL's)
+	 * -> const char *txt
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 */
+	void setCaptionString( const char *txt, uint8_t part=LV_OBJ_PART_MAIN){
+		lv_style_set_value_str( &this->_style, part, txt );
+	}
+
+	/* Set caption color (value in LGVL's)
+	 * -> lv_color_t color
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 */
+	void setCaptionColor( lv_color_t color, uint8_t part=LV_OBJ_PART_MAIN){
+		lv_style_set_value_color( &this->_style, part, color );
+	}
+
+	/* Set caption opacity (value in LGVL's)
+	 * -> lv_opa_t opacity
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 */
+	void setCaptionOpacity( lv_opa_t opacity, uint8_t part=LV_OBJ_PART_MAIN){
+		lv_style_set_value_opa( &this->_style, part, opacity );
+	}
+
+	/* Set caption font (value in LGVL's)
+	 * -> const lv_font_t *font
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 */
+	void setCaptionFont( const lv_font_t *font, uint8_t part=LV_OBJ_PART_MAIN){
+		lv_style_set_value_font( &this->_style, part, font );
+	}
+
+	/* Set caption align (value in LGVL's)
+	 * -> lv_align_t align
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 */
+	void setCaptionAlign( lv_align_t align, uint8_t part=LV_OBJ_PART_MAIN){
+		lv_style_set_value_align( &this->_style, part, align );
+	}
+
+	/* set caption offset (value in LGVL's)
+	 * -> lv_style_int_t offset_x
+	 * -> lv_style_int_t offset_y
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 */
+	void setCaptionOffset( lv_style_int_t offset_x, lv_style_int_t offset_y, uint8_t part=LV_OBJ_PART_MAIN){
+		lv_style_set_value_ofs_x( &this->_style, part, offset_x );
+		lv_style_set_value_ofs_y( &this->_style, part, offset_y );
+	}
 };
 
 #endif
