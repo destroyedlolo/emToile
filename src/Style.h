@@ -131,17 +131,68 @@ public:
 	 * -> uint8_t value
 	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
 	 */
-	void setBgOpacity( uint8_t value, uint8_t part=LV_OBJ_PART_MAIN){
+	void setBgOpacity( uint8_t value, uint8_t part=LV_OBJ_PART_MAIN ){
 		lv_style_set_bg_opa( &this->_style, part, value );
 	}
 
-	/* set border width
-	 * -> uint16_t value
+	/* set border color
+	 * -> lv_color_t color
 	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
 	 */
-	void setBorderWidth( uint16_t value, uint8_t part=LV_OBJ_PART_MAIN){
+	void setBorderColor( lv_color_t color, uint8_t part=LV_OBJ_PART_MAIN ){
+		lv_style_set_border_color( &this->_style, part, color );
+	}
+
+	/* set border width
+	 * -> lv_style_int_t value
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 */
+	void setBorderWidth( lv_style_int_t value, uint8_t part=LV_OBJ_PART_MAIN){
 		lv_style_set_border_width( &this->_style, part, value );
 	}
+
+	/* set shadow color
+	 * -> lv_color_t color
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 */
+	void setShadowColor( lv_color_t color, uint8_t part=LV_OBJ_PART_MAIN ){
+		lv_style_set_shadow_color( &this->_style, part, color );
+	}
+
+	/* set shadow opacity 
+	 * -> lv_color_t color
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 */
+	void setShadowOpacity( lv_opa_t opa, uint8_t part=LV_OBJ_PART_MAIN ){
+		lv_style_set_shadow_opa( &this->_style, part, opa );
+	}
+
+	/* set shadow width
+	 * -> lv_style_int_t value
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 */
+	void setShadowWidth( lv_style_int_t value, uint8_t part=LV_OBJ_PART_MAIN){
+		lv_style_set_shadow_width( &this->_style, part, value );
+	}
+
+	/* set shadow offset
+	 * -> lv_style_int_t offset_x
+	 * -> lv_style_int_t offset_y
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 */
+	void setShadowOffset( lv_style_int_t offset_x, lv_style_int_t offset_y, uint8_t part=LV_OBJ_PART_MAIN){
+		lv_style_set_shadow_ofs_x( &this->_style, part, offset_x );
+		lv_style_set_shadow_ofs_y( &this->_style, part, offset_y );
+	}
+
+	/* set shadow spread
+	 * -> lv_style_int_t value
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 */
+	void setShadowSpread( lv_style_int_t value, uint8_t part=LV_OBJ_PART_MAIN){
+		lv_style_set_shadow_spread( &this->_style, part, value );
+	}
+
 };
 
 #endif
