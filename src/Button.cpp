@@ -9,10 +9,5 @@ Button::Button( Container *parent, Container *cloned ){
 		parent->getMyself(),
 		cloned ? cloned->getMyself() : NULL
 	);
-
-	if(parent){
-		this->copyStyle( parent->getStyle() );
-		this->applyStyle();
-	}
 }
 

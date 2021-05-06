@@ -10,11 +10,6 @@ Container::Container( Container *parent, Container *cloned ){
 		parent->getMyself(),
 		cloned ? cloned->getMyself() : NULL
 	);
-
-	if(parent){
-		this->copyStyle( parent->getStyle() );
-		this->applyStyle();
-	}
 }
 
 Container::Container( TileView *parent, TileView *cloned ){
@@ -22,9 +17,6 @@ Container::Container( TileView *parent, TileView *cloned ){
 		parent->getMyself(),
 		cloned ? cloned->getMyself() : NULL
 	);
-
-	if(parent)
-		this->copyStyle( parent->getStyle() );
 }
 
 void Container::setTilePos( lv_point_t pos ){

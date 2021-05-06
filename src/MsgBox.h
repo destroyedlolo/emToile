@@ -19,9 +19,6 @@ public:
 			parent ? parent->getMyself() : NULL, 
 			cloned ? cloned->getMyself() : NULL
 		);
-
-		if(parent)
-			this->copyStyle( parent->getStyle() );
 	}
 
 	/* Init the message box

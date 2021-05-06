@@ -23,9 +23,6 @@ public:
 			parent->getMyself(), 
 			cloned ? cloned->getMyself() : NULL
 		);
-
-		this->copyStyle( parent->getStyle() );
-		this->applyStyle();
 	}
 
 	/* Set the text of the list

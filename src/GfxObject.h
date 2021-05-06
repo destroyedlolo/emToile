@@ -128,15 +128,15 @@ public:
 	 * Style related
 	 ***/
 
-	/* Apply a style
-	 * -> Style &style : the style to apply
+	/* Add a style
+	 * -> Style &style : the style to add
 	 * -> uint8_t part : which part to update (LV_OBJ_PART_MAIN)
 	 *
 	 * NOTEZ-BIEN :
 	 * 		Ignored if the derived class' getMyself() returns
 	 *		something different than NULL
 	 */
-	void applyStyle( Style &style, uint8_t part=LV_OBJ_PART_MAIN ){
+	void addStyle( Style &style, uint8_t part=LV_OBJ_PART_MAIN ){
 		lv_obj_add_style( this->getMyself(), part, *style );
 	}
 

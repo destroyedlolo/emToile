@@ -11,8 +11,6 @@ TileView::TileView( Container *parent, Container *cloned ){
 	);
 
 	this->setSize( parent );
-	this->copyStyle( parent->getStyle() );	// Copy style from parent
-	this->applyStyle();
 
 	lv_page_set_scrlbar_mode( this->_obj, LV_SCRLBAR_MODE_OFF );	// hide scrollbar
 }

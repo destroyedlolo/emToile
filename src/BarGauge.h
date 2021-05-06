@@ -21,11 +21,6 @@ public:
 			cloned ? cloned->getMyself() : NULL
 		);
 
-		if(parent){
-			this->copyStyle( parent->getStyle() );
-			this->applyStyle();
-		}
-
 		lv_bar_set_range( this->_obj, min, max );
 	}
 

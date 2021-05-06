@@ -9,11 +9,6 @@ Checkbox::Checkbox( Container *parent, Container *cloned ){
 		parent->getMyself(),
 		cloned ? cloned->getMyself() : NULL
 	);
-
-	if(parent){
-		this->copyStyle( parent->getStyle() );
-		this->applyStyle();
-	}
 }
 
 void Checkbox::setText( const char *text, bool istatic ){
