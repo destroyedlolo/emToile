@@ -140,6 +140,15 @@ public:
 		lv_obj_add_style( this->getMyself(), part, *style );
 	}
 
+	/* Set font
+	 *
+	 * -> lv_font_t *font : font to use
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 * -> int state (default : LV_STATE_DEFAULT)
+	 */
+	void setFont( lv_font_t *font, uint8_t part = LV_OBJ_PART_MAIN, int state = LV_STATE_DEFAULT){
+		lv_obj_set_style_local_text_font( this->getMyself(), part, state, font );
+	}
 
 	/* Set padding (locally to the object)
 	 * -> pad : all directions
@@ -162,6 +171,13 @@ public:
 	 */
 	void setClickable( bool en ){
 		lv_obj_set_click( this->getMyself(), en );
+	}
+
+	/* Set if the object is visible or not
+	 * -> bool hidden
+	 */
+	void setHidden( bool hidden ){
+		lv_obj_set_hidden( this->getMyself(), hidden );
 	}
 
 	/* Attach a callback event
