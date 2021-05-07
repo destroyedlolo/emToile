@@ -137,10 +137,10 @@ public:
 
 	/* Set backgound color
 	 * -> lv_color_t color
-	 * -> int state (default : LV_STATE_DEFAULT)
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
 	 */
-	void setBgColor( lv_color_t color, int state = LV_STATE_DEFAULT){
-		lv_style_set_bg_color( &this->_style, state, color );
+	void setBgColor( lv_color_t color, uint8_t part=LV_OBJ_PART_MAIN ){
+		lv_style_set_bg_color( &this->_style, part, color );
 	}
 
 	/* Set background opacity
