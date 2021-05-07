@@ -190,6 +190,25 @@ public:
 	void setMargin( lv_style_int_t h, lv_style_int_t v) { this->setMargin( h, h, v, v ); };
 	void setMargin( lv_style_int_t top, lv_style_int_t bottom, lv_style_int_t left, lv_style_int_t right, uint8_t part=LV_OBJ_PART_MAIN, int state=LV_STATE_DEFAULT );
 
+	/* Set backgound color
+	 * -> lv_color_t color
+	 * -> uint8_t part (only if 4 margin provided)
+	 * -> int state (default : LV_STATE_DEFAULT)
+	 */
+	void setBgColor( lv_color_t color, uint8_t part=LV_OBJ_PART_MAIN, int state=LV_STATE_DEFAULT ){
+		lv_obj_set_style_local_bg_color( this->getMyself(), part, state, color );
+	}
+
+	/* Set background opacity
+	 * -> uint8_t value
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 * -> int state (default : LV_STATE_DEFAULT)
+	 */
+	void setBgOpacity( uint8_t value, uint8_t part=LV_OBJ_PART_MAIN, int state=LV_STATE_DEFAULT ){
+		lv_obj_set_style_local_bg_opa( this->getMyself(), part, state, value );
+	}
+
+
 	/***
 	 * Misc
 	 ***/
