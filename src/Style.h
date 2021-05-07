@@ -258,6 +258,54 @@ public:
 		lv_style_set_value_ofs_x( &this->_style, part, offset_x );
 		lv_style_set_value_ofs_y( &this->_style, part, offset_y );
 	}
+
+	/* Set line color
+	 * -> lv_color_t color
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 */
+	void setLineColor( lv_color_t color, uint8_t part=LV_OBJ_PART_MAIN){
+		lv_style_set_line_color( &this->_style, part, color );
+	}
+
+	/* Set line opacity
+	 * -> lv_opa_t opacity
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 */
+	void setLineOpacity( lv_opa_t opacity, uint8_t part=LV_OBJ_PART_MAIN){
+		lv_style_set_line_opa( &this->_style, part, opacity );
+	}
+
+	/* set line width
+	 * -> lv_style_int_t value
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 */
+	void setLineWidth( lv_style_int_t value, uint8_t part=LV_OBJ_PART_MAIN){
+		lv_style_set_line_width( &this->_style, part, value );
+	}
+
+	/* set line dash width
+	 * -> lv_style_int_t value
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 */
+	void setLineDashWidth( lv_style_int_t value, uint8_t part=LV_OBJ_PART_MAIN){
+		lv_style_set_line_dash_width( &this->_style, part, value );
+	}
+
+	/* set line dash gap
+	 * -> lv_style_int_t value
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 */
+	void setLineDashGap( lv_style_int_t value, uint8_t part=LV_OBJ_PART_MAIN){
+		lv_style_set_line_dash_gap( &this->_style, part, value );
+	}
+
+	/* set line rounded
+	 * -> bool value (default : true)
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 */
+	void setLineRounded( bool value=true, uint8_t part=LV_OBJ_PART_MAIN){
+		lv_style_set_line_rounded( &this->_style, part, value );
+	}
 };
 
 #endif
