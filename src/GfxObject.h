@@ -6,7 +6,8 @@
 #ifndef GFXOBJ_H
 #define GFXOBJ_H
 
-#include "Style.h"
+#include <Arduino.h>
+#include <Style.h>
 
 #include <lvgl/lvgl.h>
 
@@ -136,8 +137,11 @@ public:
 	 * 		Ignored if the derived class' getMyself() returns
 	 *		something different than NULL
 	 */
-	void addStyle( Style &style, uint8_t part=LV_OBJ_PART_MAIN ){
-		lv_obj_add_style( this->getMyself(), part, *style );
+	void addStyle( Style *style, uint8_t part=LV_OBJ_PART_MAIN ){
+		lv_obj_add_style( this->getMyself(), part, style->getStyle() );
+	}
+	void addStyle( lv_style_t *style, uint8_t part=LV_OBJ_PART_MAIN ){
+		lv_obj_add_style( this->getMyself(), part, style );
 	}
 
 	/* Reset the given part's style

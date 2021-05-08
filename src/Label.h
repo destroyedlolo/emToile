@@ -18,11 +18,17 @@ public:
 		this->_obj = lv_label_create( parent, cloned );
 	}
 
-	Label( Container *parent, Container *cloned=NULL ){
+	Label( GfxObject *parent, GfxObject *cloned=NULL ){
 		this->_obj = lv_label_create( 
 			parent->getMyself(), 
 			cloned ? cloned->getMyself() : NULL
 		);
+	}
+
+	Label( Style *style, GfxObject *parent, GfxObject *cloned=NULL ) :
+		Label( parent, cloned )
+	{
+		this->addStyle( style );
 	}
 
 		/* Set text

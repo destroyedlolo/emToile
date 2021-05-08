@@ -11,3 +11,9 @@ Button::Button( Container *parent, Container *cloned ){
 	);
 }
 
+Button::Button( Style *style, Container *parent, Container *cloned ) : 
+	Button( parent, cloned )
+{
+	this->addStyle( style );
+}
+

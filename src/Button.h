@@ -7,7 +7,8 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include "Container.h"
+#include <Style.h>
+#include <Container.h>
 
 class Button : public Container {
 public:
@@ -16,6 +17,7 @@ public:
 	 *  	if not null, its style is copied
 	 */
 	Button( Container *parent, Container *cloned=NULL );
+	Button( Style *, Container *parent, Container *cloned=NULL );
 
 	/* Set layout policy
 	 * lv_layout_t layout
