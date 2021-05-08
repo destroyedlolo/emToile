@@ -7,7 +7,8 @@
 
 #include <Arduino.h>
 
-#include "GfxObject.h"
+#include <Style.h>
+#include <GfxObject.h>
 
 class TileView;
 
@@ -20,6 +21,10 @@ public:
 	 */
 	Container( lv_obj_t *parent=NULL, const lv_obj_t *cloned=NULL ){
 		this->_obj = lv_cont_create( parent, cloned );
+	}
+	Container( Style *style, lv_obj_t *parent=NULL, const lv_obj_t *cloned=NULL ){
+		this->_obj = lv_cont_create( parent, cloned );
+		this->addStyle( style );
 	}
 
 	Container( Container *parent, Container *cloned=NULL );

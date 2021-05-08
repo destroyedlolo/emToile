@@ -14,3 +14,10 @@ TileView::TileView( Container *parent, Container *cloned ){
 
 	lv_page_set_scrlbar_mode( this->_obj, LV_SCRLBAR_MODE_OFF );	// hide scrollbar
 }
+
+TileView::TileView( Style *style, Container *parent, Container *cloned ) : 
+	TileView( parent, cloned )
+{
+	this->addStyle( style );
+}
+

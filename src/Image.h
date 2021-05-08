@@ -35,6 +35,12 @@ public:
 		);
 	}
 
+	Image( Style *style, Container *parent, Container *cloned=NULL ) :
+		Image( parent, cloned )
+	{
+		this->addStyle( style );
+	}
+
 	/* set the image content
 	 * -> const void *src : image's source
 	 */

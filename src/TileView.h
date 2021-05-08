@@ -7,8 +7,9 @@
 #ifndef TILEV_H
 #define TILEV_H
 
-#include "GfxObject.h"
-#include "Container.h"
+#include <Style.h>
+#include <GfxObject.h>
+#include <Container.h>
 
 class TileView : public GfxObject {
 public:
@@ -23,7 +24,13 @@ public:
 	TileView( lv_obj_t *parent=NULL, const lv_obj_t *cloned=NULL ){
 		this->_obj = lv_tileview_create( parent, cloned );
 	}
+	TileView( Style *style, lv_obj_t *parent=NULL, const lv_obj_t *cloned=NULL ){
+		this->_obj = lv_tileview_create( parent, cloned );
+		this->addStyle( style );
+	}
+
 	TileView( Container *parent, Container *cloned=NULL );
+	TileView( Style *, Container *parent, Container *cloned=NULL );
 
 	/* Add a tile
 	 * -> Container *tile

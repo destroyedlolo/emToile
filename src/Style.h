@@ -76,7 +76,34 @@ public:
 	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
 	 */
 	void setImageRecolor( lv_color_t color, uint8_t part=LV_OBJ_PART_MAIN ){
-		lv_style_set_text_color( &this->_style, part, color );
+		lv_style_set_image_recolor( &this->_style, part, color );
+	}
+
+	/* Image recolor opacity
+	 * -> lv_opa_t value
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 */
+	void setImageRecolorOpacity( lv_opa_t value, uint8_t part=LV_OBJ_PART_MAIN ){
+		lv_style_set_image_recolor_opa( &this->_style, part, value );
+	}
+	void setIntensity( uint32_t intense=LV_OPA_COVER, uint8_t part=LV_OBJ_PART_MAIN ){
+		lv_style_set_image_recolor_opa( &this->_style, part, intense );	
+	}
+
+	/* Image opacity
+	 * -> lv_opa_t value
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 */
+	void setImageOpacity( lv_opa_t value, uint8_t part=LV_OBJ_PART_MAIN ){
+		lv_style_set_image_opa( &this->_style, part, value );
+	}
+
+	/* Image blend mode
+	 * -> lv_blend_mode_t value
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 */
+	void setImageBlendMode( lv_blend_mode_t value, uint8_t part=LV_OBJ_PART_MAIN ){
+		lv_style_set_image_blend_mode( &this->_style, part, value );
 	}
 
 	/* Set radius
