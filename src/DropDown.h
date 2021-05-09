@@ -25,6 +25,12 @@ public:
 		);
 	}
 
+	DropDown( Style *style, Container *parent, DropDown *cloned=NULL ) :
+		DropDown( parent, cloned )
+	{
+		this->addStyle( style );
+	}
+
 	/* Set the text of the list
 	 *
 	 * CAUTION : the text is NOT COPIED, only a reference (pointer)
