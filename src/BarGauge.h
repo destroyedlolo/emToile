@@ -5,7 +5,8 @@
 #ifndef BAR_H
 #define BAR_H
 
-#include "Container.h"
+#include <Container.h>
+#include <Style.h>
 
 class BarGauge : public GfxObject {
 public:

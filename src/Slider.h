@@ -5,6 +5,9 @@
 #ifndef SLDR_H
 #define SLDR_H
 
+#include <Container.h>
+#include <Style.h>
+
 class Slider : public GfxObject {
 	bool dispval;	// Display value on the knob
 
@@ -32,6 +35,12 @@ public:
 		    lv_obj_set_style_local_value_opa(this->_obj, LV_SLIDER_PART_KNOB, LV_STATE_FOCUSED, LV_OPA_COVER);
 		    lv_obj_set_style_local_transition_time(this->_obj, LV_SLIDER_PART_KNOB, LV_STATE_DEFAULT, 300);
 		}
+	}
+
+	Slider( Style *style, Container *parent=NULL, Container *cloned=NULL, int16_t min=0, int16_t max=100, bool displayval = false ) :
+		Slider( parent, cloned, min, max, displayval )
+	{
+		this->addStyle( style );
 	}
 
 	/* Set minimum and the maximum values of the slider
