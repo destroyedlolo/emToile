@@ -33,6 +33,9 @@ public:
 	void copyStyle( lv_style_t *style ){
 		lv_style_copy( &this->_style, style );
 	}
+	void copyStyle( Style *style ){
+		lv_style_copy( &this->_style, &style->_style );
+	}
 
 	/* Reset the style a free all used ressources */
 	void Reset( void ){

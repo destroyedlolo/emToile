@@ -24,6 +24,12 @@ public:
 		lv_bar_set_range( this->_obj, min, max );
 	}
 
+	BarGauge( Style *style, Container *parent, Container *cloned=NULL, int16_t min=0, int16_t max=100  ) :
+		BarGauge( parent, cloned, min, max )
+	{
+		this->addStyle( style );
+	}
+
 	/* Set minimum and the maximum values of a bar
 	 * int16_t min,max : extreme values
 	 */
