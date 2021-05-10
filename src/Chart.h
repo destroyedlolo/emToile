@@ -24,9 +24,11 @@ public:
 			this->_dt = lv_chart_add_series( chart, color );
 		}
 
+#if 0	// Doesn't exist in 7.7.2
 		~Serie(){
 			lv_chart_remove_series( this->_chart, this->_dt );
 		}
+#endif
 
 		lv_chart_series_t *operator *(){
 			return _dt;
@@ -37,6 +39,7 @@ public:
 			lv_chart_clear_series( this->_chart, this->_dt );
 		}
 
+#if 0	// Doesn't exist in 7.7.2
 		/* Hide or not a serie from its chart
 		 *
 		 * -> bool hide (default : true)
@@ -44,6 +47,7 @@ public:
 		void Hide( bool hide=true ){
 			lv_chart_hide_series( this->_chart, this->_dt, hide );
 		}
+#endif
 
 		/* Use external Array
 		 * Instead of instead of the dynamically allocated internal one
