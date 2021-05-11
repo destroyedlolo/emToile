@@ -1,31 +1,31 @@
 /********************************************************************
-* Page's test
+* Label's test
+*
+* Create a Label in the middle of the screen
 *********************************************************************/
 
-#include "Gui.h"
-
-#include "Label.h"
+#include <Page.h>
+#include <Label.h>
 
 	/*****
 	 * objects
 	 *****/
-	
-Gui *gui;
 
+Page *pg;
 Label *lbl;
+
 
 	/**** 
 	 * Build the GUI
 	 *****/
+void start_gui( void ){
+	pg = new Page( lv_scr_act() );
+	pg->setSize( 150, 200 );
+	pg->Align( LV_ALIGN_CENTER );
 
-Gui::Gui( void ){
-	this->pg = new Page( lv_scr_act() );
-	this->pg->setSize( 150, 200 );
-	this->pg->Align( LV_ALIGN_CENTER );
-
-	lbl = new Label( **this->pg );
-	lbl->SetLongTextMode( LV_LABEL_LONG_BREAK );
-	lbl->setWidth( this->pg->getWidthFit() );
+	lbl = new Label( pg );
+	lbl->setLongTextMode( LV_LABEL_LONG_BREAK );
+	lbl->setWidth( pg->getWidthFit() );
 	lbl->setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit,\n"
 				"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n"
 				"Ut enim ad minim veniam, quis nostrud exercitation ullamco\n"
