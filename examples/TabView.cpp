@@ -15,6 +15,13 @@ TabView	*tv;
 
 	/*****
 	 * Tabs
+	 *
+	 * Tabs are basically a Page.
+	 * The only difference is it's build upon an
+	 * existing lvgl's lv_obj_t ( consequently,
+	 * the constructor used is 
+	 * 	Page( lv_obj_t *p, bool )
+	 * to avoid creation of another lv_obj_t object
 	 *****/
 
 	/* Tab with a long text inside */
@@ -70,11 +77,8 @@ void start_gui( void ){
 	tv = new TabView( lv_scr_act() );	// Create the TabView
 
 		/* Create the 1st tab */
-	lv_obj_t *t = lv_tabview_add_tab(**tv, "Long Text");	// Lvgl object
-	TabLT *t1 = new TabLT(t);	// Assign it to a new page with dedicated content
+	TabLT *t1 = new TabLT( tv->AddTab("Long Text") );
 
 		/* Create the 2nd tab */
-	t = lv_tabview_add_tab(**tv, "Colored Text");
-	TabSL *t2 = new TabSL(t);
+	TabSL *t2 = new TabSL( tv->AddTab("Colored Text") );
 }
-
