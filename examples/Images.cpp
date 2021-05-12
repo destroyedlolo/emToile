@@ -14,9 +14,6 @@
 Page *pg;
 Image *img;
 
-LV_IMG_DECLARE(chambre_32px);
-
-
 	/**** 
 	 * Build the GUI
 	 *****/
