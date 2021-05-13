@@ -22,6 +22,12 @@ void start_gui( void ){
 	pg->setSize( 150, 200 );
 	pg->Align( LV_ALIGN_CENTER );
 
+		// Notez-bien : if the container of the image has a custom font
+		// in it's style, nothing will be displayed corresponding symbole
+		// is not part of it.
+		// The solution is to apply built-in font like lv_font_montserrat_16
+		// on the image. This font doesn't have to be declared.
 	img = new Image( pg->getMyself() );
+	img->seTexttFont( &lv_font_montserrat_16 );
 	img->Set( LV_SYMBOL_BATTERY_FULL );
 }
