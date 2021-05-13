@@ -166,7 +166,7 @@ public:
 	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
 	 * -> int state (default : LV_STATE_DEFAULT)
 	 */
-	void setFont( lv_font_t *font, uint8_t part = LV_OBJ_PART_MAIN, int state = LV_STATE_DEFAULT){
+	void seTexttFont( lv_font_t *font, uint8_t part = LV_OBJ_PART_MAIN, int state = LV_STATE_DEFAULT){
 		lv_obj_set_style_local_text_font( this->getMyself(), part, state, font );
 	}
 
