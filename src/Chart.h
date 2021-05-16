@@ -1,8 +1,10 @@
 /************************************************
 *	Chart : Display data charts
 *
-*	Notez-bien : without call of setRange(), the
-*		default min/max are 0, 100
+*	Notez-bien : 
+*		- without call of setRange(), the
+*			default min/max are 0, 100
+*		- can only store integer
 *************************************************/
 #ifndef CHART_H
 #define CHART_H
