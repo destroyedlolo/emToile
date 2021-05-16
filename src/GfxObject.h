@@ -212,6 +212,60 @@ public:
 		lv_obj_set_style_local_bg_opa( this->getMyself(), part, state, value );
 	}
 
+	/* Set caption string (value in LGVL's)
+	 * -> const char *txt
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 * -> int state (default : LV_STATE_DEFAULT)
+	 */
+	void setCaptionString( const char *txt, uint8_t part=LV_OBJ_PART_MAIN, int state=LV_STATE_DEFAULT ){
+		lv_obj_set_style_local_value_str( this->getMyself(), part, state, txt );
+	}
+
+	/* Set caption color (value in LGVL's)
+	 * -> lv_color_t color
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 * -> int state (default : LV_STATE_DEFAULT)
+	 */
+	void setCaptionColor( lv_color_t color, uint8_t part=LV_OBJ_PART_MAIN, int state=LV_STATE_DEFAULT ){
+		lv_obj_set_style_local_value_color( this->getMyself(), part, state, color );
+	}
+
+	/* Set caption opacity (value in LGVL's)
+	 * -> lv_opa_t opacity
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 * -> int state (default : LV_STATE_DEFAULT)
+	 */
+	void setCaptionOpacity( lv_opa_t opacity, uint8_t part=LV_OBJ_PART_MAIN, int state=LV_STATE_DEFAULT){
+		lv_obj_set_style_local_value_opa( this->getMyself(), part, state, opacity );
+	}
+
+	/* Set caption font (value in LGVL's)
+	 * -> const lv_font_t *font
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 * -> int state (default : LV_STATE_DEFAULT)
+	 */
+	void setCaptionFont( const lv_font_t *font, uint8_t part=LV_OBJ_PART_MAIN, int state=LV_STATE_DEFAULT ){
+		lv_obj_set_style_local_value_font( this->getMyself(), part, state, font );
+	}
+
+	/* Set caption align (value in LGVL's)
+	 * -> lv_align_t align
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 * -> int state (default : LV_STATE_DEFAULT)
+	 */
+	void setCaptionAlign( lv_align_t align, uint8_t part=LV_OBJ_PART_MAIN, int state=LV_STATE_DEFAULT ){
+		lv_obj_set_style_local_value_align( this->getMyself(), part, state, align );
+	}
+
+	/* set caption offset (value in LGVL's)
+	 * -> lv_style_int_t offset_x
+	 * -> lv_style_int_t offset_y
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 */
+	void setCaptionOffset( lv_style_int_t offset_x, lv_style_int_t offset_y, uint8_t part=LV_OBJ_PART_MAIN, int state=LV_STATE_DEFAULT ){
+		lv_obj_set_style_local_value_ofs_x( this->getMyself(), part, state, offset_x );
+		lv_obj_set_style_local_value_ofs_y( this->getMyself(), part, state, offset_y );
+	}
 
 	/***
 	 * Misc
