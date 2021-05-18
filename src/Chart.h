@@ -150,7 +150,7 @@ public:
 
 	/* Add a new serie of data
 	 *
-	 * lv_color_t color
+	 * -> lv_color_t color
 	 */
 	Serie *addSerie( lv_color_t color ){
 		return new Serie( this->getMyself(), color );
@@ -158,8 +158,8 @@ public:
 
 	/* Number of division lines
 	 *
-	 * uint8_t hdiv : horizontal ones
-	 * uint8_t vdiv : vertical ones
+	 * -> uint8_t hdiv : horizontal ones
+	 * -> uint8_t vdiv : vertical ones
 	 */
 	void divLines( uint8_t hdiv, uint8_t vdiv ){
 		lv_chart_set_div_line_count( this->getMyself(), hdiv, vdiv );
@@ -172,5 +172,30 @@ public:
 		lv_chart_refresh( this->getMyself() );
 	}
 
+	/* Set horizontal ticks labels
+	 *
+	 * -> const char *list_of_values : '\n' separated list of ticks
+	 * -> uint8_t num_tick_marks : the number of ticks between two labels
+	 *  	or total number of ticks if no labels are provided
+	 *  	Default : 0
+	 * -> lv_chart_axis_options_t options :
+	 *  	default LV_CHART_AXIS_DRAW_LAST_TICK)
+	 */
+	void xTicks( const char *list_of_values, uint8_t num_tick_marks = 0, lv_chart_axis_options_t options = LV_CHART_AXIS_DRAW_LAST_TICK){
+		lv_chart_set_x_tick_texts( this->getMyself(), list_of_values, num_tick_marks, options );
+	}
+
+	/* Set vertical ticks labels
+	 *
+	 * -> const char *list_of_values : '\n' separated list of ticks
+	 * -> uint8_t num_tick_marks : the number of ticks between two labels
+	 *  	or total number of ticks if no labels are provided
+	 *  	Default : 0
+	 * -> lv_chart_axis_options_t options :
+	 *  	default LV_CHART_AXIS_DRAW_LAST_TICK)
+	 */
+	void yTicks( const char *list_of_values, uint8_t num_tick_marks = 0, lv_chart_axis_options_t options = LV_CHART_AXIS_DRAW_LAST_TICK){
+		lv_chart_set_y_tick_texts( this->getMyself(), list_of_values, num_tick_marks, options );
+	}
 };
 #endif
