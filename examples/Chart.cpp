@@ -25,6 +25,10 @@ void start_gui( void ){
 
 	chart->setCaptionString( "Chart example" );
 
+		/* Add ticks on the left */
+	chart->setPadding( 5, 5, 4 * (LV_DPI / 10), 0, LV_CHART_PART_BG );	// set space on the left
+	chart->yTicks( "600\n500\n400\n300\n200" );
+
 		/* Add data series */
 	serie = chart->addSerie( LV_COLOR_RED );
 	serie->Insert( 0 );
