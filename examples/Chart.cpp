@@ -23,6 +23,8 @@ void start_gui( void ){
 	chart->setSize( 300, 200 );
 	chart->Align( LV_ALIGN_CENTER );
 
+	chart->setCaptionString( "Chart example" );
+
 		/* Add data series */
 	serie = chart->addSerie( LV_COLOR_RED );
 	serie->Insert( 0 );
