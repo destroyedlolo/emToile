@@ -197,5 +197,26 @@ public:
 	void yTicks( const char *list_of_values, uint8_t num_tick_marks = 0, lv_chart_axis_options_t options = LV_CHART_AXIS_DRAW_LAST_TICK){
 		lv_chart_set_y_tick_texts( this->getMyself(), list_of_values, num_tick_marks, options );
 	}
+
+	void secyTicks( const char *list_of_values, uint8_t num_tick_marks = 0, lv_chart_axis_options_t options = LV_CHART_AXIS_DRAW_LAST_TICK){
+		lv_chart_set_secondary_y_tick_texts( this->getMyself(), list_of_values, num_tick_marks, options );
+	}
+
+	/* Set ticks line len
+	 * -> uint8_t major : close the ticks label	( default : LV_CHART_TICK_LENGTH_AUTO )
+	 * -> uint8_t minor : in the graph ( default : LV_CHART_TICK_LENGTH_AUTO )
+	 */
+	void xTicksLen( uint8_t major = LV_CHART_TICK_LENGTH_AUTO, uint8_t minor = LV_CHART_TICK_LENGTH_AUTO){
+		lv_chart_set_x_tick_length( this->getMyself(), major, minor );
+	}
+
+	void yTicksLen( uint8_t major = LV_CHART_TICK_LENGTH_AUTO, uint8_t minor = LV_CHART_TICK_LENGTH_AUTO){
+		lv_chart_set_y_tick_length( this->getMyself(), major, minor );
+	}
+
+	void secyTicksLen( uint8_t major = LV_CHART_TICK_LENGTH_AUTO, uint8_t minor = LV_CHART_TICK_LENGTH_AUTO){
+		lv_chart_set_secondary_y_tick_length( this->getMyself(), major, minor );
+	}
+
 };
 #endif
