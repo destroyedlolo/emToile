@@ -49,18 +49,26 @@
 
 
 	/****
-	* This app own information
-	*****/
-
-// Topic to monitor
-const char * const TOPIC = "TeleInfo/Production/values/PAPP";
-
-	/****
 	* GUI objects
 	*****/
 
 TTGOClass *ttgo;
 Label *lbl_production;
+Label *lbl_consommation;
+
+
+	/****
+	* This app own information
+	*****/
+
+// Topic to monitor
+struct {
+	const char * const TOPIC;
+	Label *&lbl;
+} topics[] = {
+	{ "TeleInfo/Production/values/PAPP", lbl_production },
+	{ "TeleInfo/Consommation/values/PAPP", lbl_consommation },
+};
 
 	/****
 	 * Network
@@ -100,15 +108,18 @@ void connectToMqtt(){
 }
 
 void onMqttConnect(bool ){
-	mqttClient.subscribe(TOPIC, 0);
+	for(int i = 0; i < sizeof(topics)/sizeof(topics[1]); i++){
+  		Serial.print("Registering : ");
+		Serial.println(topics[i].TOPIC);
+		mqttClient.subscribe(topics[i].TOPIC, 0);
+	}
 }
 
 void onMqttDisconnect(AsyncMqttClientDisconnectReason reason){
   Serial.println("Disconnected from MQTT.");
 
-  if (WiFi.isConnected()) {
+  if (WiFi.isConnected())
     xTimerStart(mqttReconnectTimer, 0);
-  }
 }
 
 void onMqttMessage(char* topic, char* payload, AsyncMqttClientMessageProperties properties, size_t len, size_t index, size_t total){
@@ -121,7 +132,12 @@ void onMqttMessage(char* topic, char* payload, AsyncMqttClientMessageProperties 
 	Serial.print("> ");
 	Serial.println(t);
 
-	lbl_production->setText( t );
+	for(int i = 0; i < sizeof(topics)/sizeof(topics[1]); i++){
+		if(!strcmp( topic, topics[i].TOPIC)){
+			topics[i].lbl->setText( t );
+			break;
+		}
+	}
 }
 
 void setup(){
@@ -196,8 +212,17 @@ void setup(){
 		*****/
 	
 	lbl_production = new Label( lv_scr_act() );
+	lbl_production->setLongTextMode( LV_LABEL_LONG_BREAK );
 	lbl_production->setWidth( 50 );
-	
+	lbl_production->textAlign( LV_LABEL_ALIGN_RIGHT);
+	lbl_production->Align( LV_ALIGN_IN_TOP_RIGHT );
+
+	lbl_consommation = new Label( lv_scr_act() );
+	lbl_consommation->setLongTextMode( LV_LABEL_LONG_BREAK );
+	lbl_consommation->setWidth( 50 );
+	lbl_consommation->textAlign( LV_LABEL_ALIGN_RIGHT);
+	lbl_consommation->Align( LV_ALIGN_OUT_BOTTOM_MID, lbl_production );
+
 		/****
 		* Network
 		*****/
