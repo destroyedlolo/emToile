@@ -16,6 +16,9 @@
 #include <WiFi.h>
 #include <AsyncMqttClient.h>
 
+#include <Label.h>
+
+
 	/* 
 	 * Include my own home network definition 
 	 * ...
@@ -53,10 +56,11 @@
 const char * const TOPIC = "TeleInfo/Production/values/PAPP";
 
 	/****
-	* Shared object
+	* GUI objects
 	*****/
 
-// TTGOClass *ttgo;
+TTGOClass *ttgo;
+Label *lbl_production;
 
 	/****
 	 * Network
@@ -108,10 +112,16 @@ void onMqttDisconnect(AsyncMqttClientDisconnectReason reason){
 }
 
 void onMqttMessage(char* topic, char* payload, AsyncMqttClientMessageProperties properties, size_t len, size_t index, size_t total){
+	char t[len+1];
+	strncpy(t, payload, len);
+	t[len] = 0;
+
 	Serial.print("topic: ");
 	Serial.println(topic);
 	Serial.print("> ");
-	Serial.println(payload);
+	Serial.println(t);
+
+	lbl_production->setText( t );
 }
 
 void setup(){
@@ -170,6 +180,25 @@ void setup(){
 	}
 
 		/****
+		* GUI initialisation
+		*****/
+
+	ttgo = TTGOClass::getWatch();
+	ttgo->begin();
+
+	ttgo->lvgl_begin();
+	ttgo->lvgl_whirling(3);	// power connector is on top
+
+	ttgo->openBL();	// Turn on the backlight
+
+		/****
+		* Build the GUI
+		*****/
+	
+	lbl_production = new Label( lv_scr_act() );
+	lbl_production->setWidth( 50 );
+	
+		/****
 		* Network
 		*****/
 
@@ -197,5 +226,6 @@ void setup(){
 }
 
 void loop(){
-	delay( 10 );
+	lv_task_handler();
+	delay( 5 );
 }
