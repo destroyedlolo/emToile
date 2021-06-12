@@ -44,6 +44,14 @@
 #	define BROKER_PORT 1883
 #endif
 
+
+	/****
+	* This app own information
+	*****/
+
+// Topic to monitor
+const char * const TOPIC = "TeleInfo/Production/values/PAPP";
+
 	/****
 	* Shared object
 	*****/
@@ -87,7 +95,8 @@ void connectToMqtt(){
   mqttClient.connect();
 }
 
-void onMqttConnect(bool sessionPresent){
+void onMqttConnect(bool ){
+	mqttClient.subscribe(TOPIC, 0);
 }
 
 void onMqttDisconnect(AsyncMqttClientDisconnectReason reason){
@@ -101,6 +110,8 @@ void onMqttDisconnect(AsyncMqttClientDisconnectReason reason){
 void onMqttMessage(char* topic, char* payload, AsyncMqttClientMessageProperties properties, size_t len, size_t index, size_t total){
 	Serial.print("topic: ");
 	Serial.println(topic);
+	Serial.print("> ");
+	Serial.println(payload);
 }
 
 void setup(){
@@ -171,6 +182,8 @@ void setup(){
   	mqttClient.onMessage(onMqttMessage);
 	mqttClient.setServer(BROKER_HOST, BROKER_PORT);
 	
+	connectToWifi();
+
 		/****
 		* Completed
 		*****/
@@ -184,4 +197,5 @@ void setup(){
 }
 
 void loop(){
+	delay( 10 );
 }
