@@ -53,8 +53,12 @@
 	*****/
 
 TTGOClass *ttgo;
+
+Style *mainStyle;
+
 Label *lbl_production;
 Label *lbl_consommation;
+Label *lbl_pump;
 
 
 	/****
@@ -68,6 +72,7 @@ struct {
 } topics[] = {
 	{ "TeleInfo/Production/values/PAPP", lbl_production },
 	{ "TeleInfo/Consommation/values/PAPP", lbl_consommation },
+	{ "TeleInfo/PompePiscine/values/PAPP", lbl_pump},
 };
 
 	/****
@@ -210,7 +215,14 @@ void setup(){
 		/****
 		* Build the GUI
 		*****/
-	
+	mainStyle = new Style();
+	mainStyle->setBgColor( LV_COLOR_BLACK );
+	mainStyle->setBgGradColor( LV_COLOR_NAVY );
+	mainStyle->setBgGradDir( LV_GRAD_DIR_VER );
+
+	lv_obj_add_style( lv_scr_act(), LV_OBJ_PART_MAIN, mainStyle->getStyle() );
+
+
 	lbl_production = new Label( lv_scr_act() );
 	lbl_production->setLongTextMode( LV_LABEL_LONG_BREAK );
 	lbl_production->setWidth( 50 );
@@ -222,6 +234,12 @@ void setup(){
 	lbl_consommation->setWidth( 50 );
 	lbl_consommation->textAlign( LV_LABEL_ALIGN_RIGHT);
 	lbl_consommation->Align( LV_ALIGN_OUT_BOTTOM_MID, lbl_production );
+
+	lbl_pump = new Label( lv_scr_act() );
+	lbl_pump->setLongTextMode( LV_LABEL_LONG_BREAK );
+	lbl_pump->setWidth( 50 );
+	lbl_pump->textAlign( LV_LABEL_ALIGN_RIGHT);
+	lbl_pump->Align( LV_ALIGN_OUT_BOTTOM_MID, lbl_consommation );
 
 		/****
 		* Network

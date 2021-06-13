@@ -169,6 +169,38 @@ public:
 		lv_style_set_bg_color( &this->_style, state, color );
 	}
 
+	/* Set backgound gardian target color
+	 * -> lv_color_t color
+	 * -> uint8_t state (default : LV_STATE_DEFAULT)
+	 */
+	void setBgGradColor( lv_color_t color, int state=LV_STATE_DEFAULT ){
+		lv_style_set_bg_grad_color( &this->_style, state, color );
+	}
+
+	/* Set backgound gardian direction
+	 * -> int direction (LV_GRAD_DIR_VER or LV_GRAD_DIR_HOR)
+	 * -> uint8_t state (default : LV_STATE_DEFAULT)
+	 */
+	void setBgGradDir( int direction, int state=LV_STATE_DEFAULT ){
+		lv_style_set_bg_grad_dir( &this->_style, state, direction );
+	}
+
+	/* where the main color stops and the gradiant start
+	 * -> uint8_t where
+	 * -> uint8_t state (default : LV_STATE_DEFAULT)
+	 */
+	void setBgGradStart( uint8_t where, int state=LV_STATE_DEFAULT ){
+		lv_style_set_bg_main_stop( &this->_style, state, where );
+	}
+
+	/* where the gradiant stops
+	 * -> uint8_t where
+	 * -> uint8_t state (default : LV_STATE_DEFAULT)
+	 */
+	void setBgGradStop( uint8_t where, int state=LV_STATE_DEFAULT ){
+		lv_style_set_bg_grad_stop( &this->_style, state, where );
+	}
+
 	/* Set background opacity
 	 * -> uint8_t value
 	 * -> uint8_t state (default : LV_STATE_DEFAULT)
