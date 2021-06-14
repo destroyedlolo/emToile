@@ -16,6 +16,8 @@
 #include <WiFi.h>
 #include <AsyncMqttClient.h>
 
+#include <Button.h>
+#include <Image.h>
 #include <Label.h>
 
 
@@ -55,11 +57,39 @@
 TTGOClass *ttgo;
 
 Style *mainStyle;
+Style *selectorStyle;
+
+class figure {
+	Button	*button;
+	Image	*icon;
+	Label 	*value;
+
+public :
+	figure( const char *const icn, Style *style, lv_align_t aln, const lv_obj_t *base=NULL ){
+		this->button = new Button( lv_scr_act() );
+		this->button->addStyle( style );
+		this->button->setLayout( LV_LAYOUT_ROW_MID );	// child are horizontally aligned
+		this->button->Align( aln, base );
+
+		this->icon = new Image( this->button );
+		this->icon->addStyle( style );
+		this->icon->Set( icn );
+		this->icon->setClickable( false );
+
+		this->value = new Label( this->button );
+		this->value->addStyle( style );
+		this->value->setWidth( 75 );
+		this->value->textAlign( LV_LABEL_ALIGN_RIGHT );
+		this->value->setLongTextMode( LV_LABEL_LONG_BREAK );
+		this->value->setClickable( false );
+	}
+};
+
+class figure *production, *consommation, *pump;
 
 Label *lbl_production;
 Label *lbl_consommation;
 Label *lbl_pump;
-
 
 	/****
 	* This app own information
@@ -222,6 +252,14 @@ void setup(){
 
 	lv_obj_add_style( lv_scr_act(), LV_OBJ_PART_MAIN, mainStyle->getStyle() );
 
+	selectorStyle = new Style();
+selectorStyle->setBgColor( LV_COLOR_BLACK ); // Test only
+	selectorStyle->setRadius( 2 );
+	selectorStyle->setPadding( 2 );
+	selectorStyle->setTextColor( LV_COLOR_WHITE );
+	selectorStyle->seTexttFont( &lv_font_montserrat_28 );
+	
+	production = new figure( LV_SYMBOL_HOME, selectorStyle, LV_ALIGN_IN_BOTTOM_RIGHT );
 
 	lbl_production = new Label( lv_scr_act() );
 	lbl_production->setLongTextMode( LV_LABEL_LONG_BREAK );
@@ -232,6 +270,7 @@ void setup(){
 	lbl_consommation = new Label( lv_scr_act() );
 	lbl_consommation->setLongTextMode( LV_LABEL_LONG_BREAK );
 	lbl_consommation->setWidth( 50 );
+	lbl_consommation->seTexttFont( &lv_font_montserrat_28 );
 	lbl_consommation->textAlign( LV_LABEL_ALIGN_RIGHT);
 	lbl_consommation->Align( LV_ALIGN_OUT_BOTTOM_MID, lbl_production );
 
