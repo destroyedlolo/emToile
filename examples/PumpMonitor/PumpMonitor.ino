@@ -65,11 +65,11 @@ class figure {
 	Label 	*value;
 
 public :
-	figure( const char *const icn, Style *style, lv_align_t aln, const lv_obj_t *base=NULL ){
+	figure( const char *const icn, Style *style, lv_align_t aln, const figure *base=NULL ){
 		this->button = new Button( lv_scr_act() );
 		this->button->addStyle( style );
 		this->button->setLayout( LV_LAYOUT_ROW_MID );	// child are horizontally aligned
-		this->button->Align( aln, base );
+		this->button->Align( aln, base ? base->button->getMyself() : NULL );
 
 		this->icon = new Image( this->button );
 		this->icon->addStyle( style );
@@ -254,12 +254,14 @@ void setup(){
 
 	selectorStyle = new Style();
 selectorStyle->setBgColor( LV_COLOR_BLACK ); // Test only
-	selectorStyle->setRadius( 2 );
+	selectorStyle->setRadius( 3 );
 	selectorStyle->setPadding( 2 );
 	selectorStyle->setTextColor( LV_COLOR_WHITE );
 	selectorStyle->seTexttFont( &lv_font_montserrat_28 );
 	
 	production = new figure( LV_SYMBOL_HOME, selectorStyle, LV_ALIGN_IN_BOTTOM_RIGHT );
+	consommation = new figure( LV_SYMBOL_CHARGE, selectorStyle, LV_ALIGN_OUT_TOP_MID, production );
+	pump = new figure( LV_SYMBOL_SETTINGS, selectorStyle, LV_ALIGN_OUT_TOP_MID, consommation );
 
 	lbl_production = new Label( lv_scr_act() );
 	lbl_production->setLongTextMode( LV_LABEL_LONG_BREAK );
