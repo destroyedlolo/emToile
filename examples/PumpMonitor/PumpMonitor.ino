@@ -60,32 +60,39 @@ Style *mainStyle;
 Style *selectorStyle;
 
 class figure {
-	Button	*button;
+	Container	*button;
 	Image	*icon;
 	Label 	*value;
 
 public :
 	figure( const char *const icn, Style *style, lv_align_t aln, const figure *base=NULL ){
-		this->button = new Button( lv_scr_act() );
+		this->button = new Container( lv_scr_act() );
 		this->button->addStyle( style );
-		this->button->setWidth( 150 );
-		this->button->setLayout( LV_LAYOUT_ROW_MID );	// child are horizontally aligned
+//		this->button->setWidth( 100 );
+		this->button->setPadding( 7 );
+		this->button->setMargin( 5 );
+		this->button->setLayout( LV_LAYOUT_OFF );	// child are horizontally aligned
+		this->button->setFit( LV_FIT_TIGHT );
 		this->button->Align( aln, base ? base->button->getMyself() : NULL );
-
-		this->icon = new Image( this->button );
-		this->icon->addStyle( style );
-		this->icon->Set( icn );
-		this->icon->setClickable( false );
+		this->button->AutoRealign( true );
 
 		this->value = new Label( this->button );
 		this->value->addStyle( style );
+		this->value->Align( LV_ALIGN_IN_RIGHT_MID, this->button );
 		this->value->setLongTextMode( LV_LABEL_LONG_BREAK );
-		this->value->setWidth( 100 );
+		this->value->setWidth( 75 );
 		this->value->textAlign( LV_LABEL_ALIGN_RIGHT );
 		this->value->setClickable( false );
 
+		this->icon = new Image( this->button );
+//		this->icon->addStyle( style );
+		this->icon->Align( LV_ALIGN_OUT_LEFT_MID, this->value->getMyself() );
+		this->icon->Set( icn );
+		this->icon->setClickable( false );
+
 this->button->dumpObj("button");
 this->value->dumpObj("label ");
+this->icon->dumpObj("icon ");
 	}
 
 	void setText( const char *val ){
@@ -259,7 +266,7 @@ void setup(){
 	selectorStyle = new Style();
 selectorStyle->setBgColor( LV_COLOR_BLACK ); // Test only
 	selectorStyle->setRadius( 5 );
-	selectorStyle->setPadding( 5 );
+	selectorStyle->setPadding( 0 );
 	selectorStyle->setTextColor( LV_COLOR_WHITE );
 	selectorStyle->seTexttFont( &lv_font_montserrat_28 );
 	
