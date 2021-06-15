@@ -60,13 +60,13 @@ Style *mainStyle;
 Style *selectorStyle;
 
 class figure {
-	Container	*button;
+	Button	*button;
 	Image	*icon;
 	Label 	*value;
 
 public :
 	figure( const char *const icn, Style *style, lv_align_t aln, const figure *base=NULL ){
-		this->button = new Container( lv_scr_act() );
+		this->button = new Button( lv_scr_act() );
 		this->button->addStyle( style );
 //		this->button->setWidth( 100 );
 		this->button->setPadding( 7 );
@@ -75,6 +75,7 @@ public :
 		this->button->setFit( LV_FIT_TIGHT );
 		this->button->Align( aln, base ? base->button->getMyself() : NULL );
 		this->button->AutoRealign( true );
+		this->button->setCHeckable( true );
 
 		this->value = new Label( this->button );
 		this->value->addStyle( style );
@@ -264,11 +265,18 @@ void setup(){
 	lv_obj_add_style( lv_scr_act(), LV_OBJ_PART_MAIN, mainStyle->getStyle() );
 
 	selectorStyle = new Style();
-selectorStyle->setBgColor( LV_COLOR_BLACK ); // Test only
+	selectorStyle->setBgColor( LV_COLOR_MAKE( 0x00, 0x00, 0x40 ) );
+	selectorStyle->setBgGradColor( LV_COLOR_NAVY );
+	selectorStyle->setBgGradDir( LV_GRAD_DIR_VER );
+	selectorStyle->setBgColor( LV_COLOR_GREEN, LV_BTN_STATE_CHECKED_RELEASED );
+	selectorStyle->setBgGradColor( LV_COLOR_TEAL, LV_BTN_STATE_CHECKED_RELEASED );
+	selectorStyle->setBgGradDir( LV_GRAD_DIR_VER, LV_BTN_STATE_CHECKED_RELEASED );
 	selectorStyle->setRadius( 5 );
 	selectorStyle->setPadding( 0 );
 	selectorStyle->setTextColor( LV_COLOR_WHITE );
 	selectorStyle->seTexttFont( &lv_font_montserrat_28 );
+	selectorStyle->setBorderColor( LV_COLOR_BLACK );
+	selectorStyle->setImageRecolor( LV_COLOR_SILVER );
 	
 	production = new figure( LV_SYMBOL_HOME, selectorStyle, LV_ALIGN_IN_TOP_RIGHT );
 	consommation = new figure( LV_SYMBOL_CHARGE, selectorStyle, LV_ALIGN_OUT_BOTTOM_MID, production );
