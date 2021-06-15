@@ -68,6 +68,7 @@ public :
 	figure( const char *const icn, Style *style, lv_align_t aln, const figure *base=NULL ){
 		this->button = new Button( lv_scr_act() );
 		this->button->addStyle( style );
+		this->button->setWidth( 150 );
 		this->button->setLayout( LV_LAYOUT_ROW_MID );	// child are horizontally aligned
 		this->button->Align( aln, base ? base->button->getMyself() : NULL );
 
@@ -78,12 +79,13 @@ public :
 
 		this->value = new Label( this->button );
 		this->value->addStyle( style );
+		this->value->setLongTextMode( LV_LABEL_LONG_BREAK );
 		this->value->setWidth( 100 );
 		this->value->textAlign( LV_LABEL_ALIGN_RIGHT );
-		this->value->setLongTextMode( LV_LABEL_LONG_BREAK );
 		this->value->setClickable( false );
 
-this->value->dumpObj();
+this->button->dumpObj("button");
+this->value->dumpObj("label ");
 	}
 
 	void setText( const char *val ){
