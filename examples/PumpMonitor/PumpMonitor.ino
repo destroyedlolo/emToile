@@ -93,10 +93,6 @@ this->value->dumpObj();
 
 class figure *production, *consommation, *pump;
 
-Label *lbl_production;
-Label *lbl_consommation;
-Label *lbl_pump;
-
 	/****
 	* This app own information
 	*****/
@@ -265,28 +261,10 @@ selectorStyle->setBgColor( LV_COLOR_BLACK ); // Test only
 	selectorStyle->setTextColor( LV_COLOR_WHITE );
 	selectorStyle->seTexttFont( &lv_font_montserrat_28 );
 	
-	production = new figure( LV_SYMBOL_HOME, selectorStyle, LV_ALIGN_IN_BOTTOM_RIGHT );
-	consommation = new figure( LV_SYMBOL_CHARGE, selectorStyle, LV_ALIGN_OUT_TOP_MID, production );
-	pump = new figure( LV_SYMBOL_SETTINGS, selectorStyle, LV_ALIGN_OUT_TOP_MID, consommation );
+	production = new figure( LV_SYMBOL_HOME, selectorStyle, LV_ALIGN_IN_TOP_RIGHT );
+	consommation = new figure( LV_SYMBOL_CHARGE, selectorStyle, LV_ALIGN_OUT_BOTTOM_MID, production );
+	pump = new figure( LV_SYMBOL_SETTINGS, selectorStyle, LV_ALIGN_OUT_BOTTOM_MID, consommation );
 
-	lbl_production = new Label( lv_scr_act() );
-	lbl_production->setLongTextMode( LV_LABEL_LONG_BREAK );
-	lbl_production->setWidth( 50 );
-	lbl_production->textAlign( LV_LABEL_ALIGN_RIGHT);
-	lbl_production->Align( LV_ALIGN_IN_TOP_RIGHT );
-
-	lbl_consommation = new Label( lv_scr_act() );
-	lbl_consommation->setLongTextMode( LV_LABEL_LONG_BREAK );
-	lbl_consommation->setWidth( 50 );
-	lbl_consommation->seTexttFont( &lv_font_montserrat_28 );
-	lbl_consommation->textAlign( LV_LABEL_ALIGN_RIGHT);
-	lbl_consommation->Align( LV_ALIGN_OUT_BOTTOM_MID, lbl_production );
-
-	lbl_pump = new Label( lv_scr_act() );
-	lbl_pump->setLongTextMode( LV_LABEL_LONG_BREAK );
-	lbl_pump->setWidth( 50 );
-	lbl_pump->textAlign( LV_LABEL_ALIGN_RIGHT);
-	lbl_pump->Align( LV_ALIGN_OUT_BOTTOM_MID, lbl_consommation );
 
 		/****
 		* Network
