@@ -167,8 +167,8 @@ void onMqttMessage(char* topic, char* payload, AsyncMqttClientMessageProperties 
 	t[len] = 0;
 
 	Serial.print("topic: ");
-	Serial.println(topic);
-	Serial.print("> ");
+	Serial.print(topic);
+	Serial.print(" > ");
 	Serial.println(t);
 
 	for(int i = 0; i < sizeof(topics)/sizeof(topics[1]); i++){
@@ -258,8 +258,8 @@ void setup(){
 
 	selectorStyle = new Style();
 selectorStyle->setBgColor( LV_COLOR_BLACK ); // Test only
-	selectorStyle->setRadius( 3 );
-	selectorStyle->setPadding( 2 );
+	selectorStyle->setRadius( 5 );
+	selectorStyle->setPadding( 5 );
 	selectorStyle->setTextColor( LV_COLOR_WHITE );
 	selectorStyle->seTexttFont( &lv_font_montserrat_28 );
 	
