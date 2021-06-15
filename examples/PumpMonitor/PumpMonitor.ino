@@ -78,10 +78,16 @@ public :
 
 		this->value = new Label( this->button );
 		this->value->addStyle( style );
-		this->value->setWidth( 75 );
+		this->value->setWidth( 100 );
 		this->value->textAlign( LV_LABEL_ALIGN_RIGHT );
 		this->value->setLongTextMode( LV_LABEL_LONG_BREAK );
 		this->value->setClickable( false );
+
+this->value->dumpObj();
+	}
+
+	void setText( const char *val ){
+		this->value->setText( val );
 	}
 };
 
@@ -98,11 +104,11 @@ Label *lbl_pump;
 // Topic to monitor
 struct {
 	const char * const TOPIC;
-	Label *&lbl;
+	figure *&lbl;
 } topics[] = {
-	{ "TeleInfo/Production/values/PAPP", lbl_production },
-	{ "TeleInfo/Consommation/values/PAPP", lbl_consommation },
-	{ "TeleInfo/PompePiscine/values/PAPP", lbl_pump},
+	{ "TeleInfo/Production/values/PAPP", production },
+	{ "TeleInfo/Consommation/values/PAPP", consommation },
+	{ "TeleInfo/PompePiscine/values/PAPP", pump},
 };
 
 	/****
