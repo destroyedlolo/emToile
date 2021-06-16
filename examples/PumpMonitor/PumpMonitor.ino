@@ -257,26 +257,6 @@ void setup(){
 	mainStyle->setTextColor( LV_COLOR_WHITE );
 	mainStyle->seTexttFont( &lv_font_montserrat_28 );
 
-
-#if 0
-	lv_obj_add_style( lv_scr_act(), LV_OBJ_PART_MAIN, mainStyle->getStyle() );
-
-	selectorStyle = new Style();
-	selectorStyle->setBgColor( LV_COLOR_MAKE( 0x00, 0x00, 0x40 ) );
-	selectorStyle->setBgGradColor( LV_COLOR_NAVY );
-	selectorStyle->setBgGradDir( LV_GRAD_DIR_VER );
-	selectorStyle->setBgColor( LV_COLOR_GREEN, LV_BTN_STATE_CHECKED_RELEASED );
-	selectorStyle->setBgGradColor( LV_COLOR_TEAL, LV_BTN_STATE_CHECKED_RELEASED );
-	selectorStyle->setBgGradDir( LV_GRAD_DIR_VER, LV_BTN_STATE_CHECKED_RELEASED );
-	selectorStyle->setRadius( 5 );
-	selectorStyle->setPadding( 0 );
-	selectorStyle->setTextColor( LV_COLOR_WHITE );
-	selectorStyle->seTexttFont( &lv_font_montserrat_28 );
-	selectorStyle->setBorderColor( LV_COLOR_BLACK );
-	selectorStyle->setImageRecolor( LV_COLOR_SILVER );
-	
-#endif
-
 	tv = new TabView( lv_scr_act() );	// Create the TabView
 	tv->addStyle( mainStyle );
 	tv->setBgColor( LV_COLOR_NAVY, LV_TABVIEW_PART_TAB_BG );
@@ -284,6 +264,7 @@ void setup(){
 	tv->setBgGradDir( LV_GRAD_DIR_VER, LV_TABVIEW_PART_TAB_BG );
 	tv->setTextColor( LV_COLOR_SILVER, LV_TABVIEW_PART_TAB_BG  );
 	tv->seTexttFont( &lv_font_montserrat_22, LV_TABVIEW_PART_TAB_BG );
+	tv->setPadding( 5,5,5,5, LV_TABVIEW_PART_TAB_BTN  );
 	tv->setTextColor( LV_COLOR_YELLOW, LV_TABVIEW_PART_TAB_BTN, LV_STATE_CHECKED );
 
 	production = new PTab( tv->AddTab( LV_SYMBOL_HOME " Prod" ), LV_SYMBOL_HOME " ", 0, "Production" );
