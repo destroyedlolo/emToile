@@ -16,10 +16,15 @@
 #include <WiFi.h>
 #include <AsyncMqttClient.h>
 
-#include <Button.h>
-#include <Image.h>
+#include <TabView.h>
+#include <Page.h>
 #include <Label.h>
 
+
+#if 0
+#include <Button.h>
+#include <Image.h>
+#endif
 
 	/* 
 	 * Include my own home network definition 
@@ -56,9 +61,46 @@
 
 TTGOClass *ttgo;
 
+TabView	*tv;
+
 Style *mainStyle;
 Style *selectorStyle;
 
+	/* Tab to display power usage */
+class PTab : public Page {
+	Label *title;
+	const char *icn;
+	String tab_title;
+	uint16_t id;
+
+public :
+	
+		/* Constructor
+		 * lv_obj_t *np : new page object pointer from TileView
+		 * const char * const icon	: icon to add to the tab name, including space
+		 * uint16_t aidx : index in the tabview
+		 * const char *title
+		 */
+	PTab( lv_obj_t *np, const char * const aicn, uint16_t aidx, const char *atitle ) : 
+	Page( np, true ), icn(aicn), id(aidx) {
+		this->title = new Label( **this );
+		this->title->Align( LV_ALIGN_IN_TOP_MID );	// in the middle of the page
+		this->title->AutoRealign( true );		// to ensure the alignment is correct
+		this->title->setTextStatic( atitle );
+	}
+
+		/* Change the title as per received value */
+	void setText( const char *val ){
+		this->tab_title = icn;
+		this->tab_title += val;
+
+		tv->setTabName( this->id, (char *)this->tab_title.c_str() );
+	}
+};
+
+PTab *production, *consommation, *pump;
+
+#if 0
 class figure {
 	Button	*button;
 	Image	*icon;
@@ -91,9 +133,6 @@ public :
 		this->icon->Set( icn );
 		this->icon->setClickable( false );
 
-this->button->dumpObj("button");
-this->value->dumpObj("label ");
-this->icon->dumpObj("icon ");
 	}
 
 	void setText( const char *val ){
@@ -102,6 +141,7 @@ this->icon->dumpObj("icon ");
 };
 
 class figure *production, *consommation, *pump;
+#endif
 
 	/****
 	* This app own information
@@ -110,7 +150,7 @@ class figure *production, *consommation, *pump;
 // Topic to monitor
 struct {
 	const char * const TOPIC;
-	figure *&lbl;
+	PTab *&lbl;
 } topics[] = {
 	{ "TeleInfo/Production/values/PAPP", production },
 	{ "TeleInfo/Consommation/values/PAPP", consommation },
@@ -257,6 +297,7 @@ void setup(){
 		/****
 		* Build the GUI
 		*****/
+#if 0
 	mainStyle = new Style();
 	mainStyle->setBgColor( LV_COLOR_BLACK );
 	mainStyle->setBgGradColor( LV_COLOR_NAVY );
@@ -281,6 +322,12 @@ void setup(){
 	production = new figure( LV_SYMBOL_HOME, selectorStyle, LV_ALIGN_IN_TOP_RIGHT );
 	consommation = new figure( LV_SYMBOL_CHARGE, selectorStyle, LV_ALIGN_OUT_BOTTOM_MID, production );
 	pump = new figure( LV_SYMBOL_SETTINGS, selectorStyle, LV_ALIGN_OUT_BOTTOM_MID, consommation );
+#endif
+
+	tv = new TabView( lv_scr_act() );	// Create the TabView
+	production = new PTab( tv->AddTab( LV_SYMBOL_HOME " Production" ), LV_SYMBOL_HOME " ", 0, "Production" );
+	consommation = new PTab( tv->AddTab( LV_SYMBOL_CHARGE " Consommation" ), LV_SYMBOL_CHARGE " ", 1, "Consommation" );
+	pump = new PTab( tv->AddTab( LV_SYMBOL_SETTINGS " Pompe" ), LV_SYMBOL_SETTINGS " ", 2, "Pompe" );
 
 
 		/****
