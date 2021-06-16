@@ -21,11 +21,6 @@
 #include <Label.h>
 
 
-#if 0
-#include <Button.h>
-#include <Image.h>
-#endif
-
 	/* 
 	 * Include my own home network definition 
 	 * ...
@@ -99,49 +94,6 @@ public :
 };
 
 PTab *production, *consommation, *pump;
-
-#if 0
-class figure {
-	Button	*button;
-	Image	*icon;
-	Label 	*value;
-
-public :
-	figure( const char *const icn, Style *style, lv_align_t aln, const figure *base=NULL ){
-		this->button = new Button( lv_scr_act() );
-		this->button->addStyle( style );
-//		this->button->setWidth( 100 );
-		this->button->setPadding( 7 );
-		this->button->setMargin( 5 );
-		this->button->setLayout( LV_LAYOUT_OFF );	// child are horizontally aligned
-		this->button->setFit( LV_FIT_TIGHT );
-		this->button->Align( aln, base ? base->button->getMyself() : NULL );
-		this->button->AutoRealign( true );
-		this->button->setCHeckable( true );
-
-		this->value = new Label( this->button );
-		this->value->addStyle( style );
-		this->value->Align( LV_ALIGN_IN_RIGHT_MID, this->button );
-		this->value->setLongTextMode( LV_LABEL_LONG_BREAK );
-		this->value->setWidth( 75 );
-		this->value->textAlign( LV_LABEL_ALIGN_RIGHT );
-		this->value->setClickable( false );
-
-		this->icon = new Image( this->button );
-//		this->icon->addStyle( style );
-		this->icon->Align( LV_ALIGN_OUT_LEFT_MID, this->value->getMyself() );
-		this->icon->Set( icn );
-		this->icon->setClickable( false );
-
-	}
-
-	void setText( const char *val ){
-		this->value->setText( val );
-	}
-};
-
-class figure *production, *consommation, *pump;
-#endif
 
 	/****
 	* This app own information
@@ -297,12 +249,15 @@ void setup(){
 		/****
 		* Build the GUI
 		*****/
-#if 0
 	mainStyle = new Style();
 	mainStyle->setBgColor( LV_COLOR_BLACK );
+	mainStyle->setBgGradStart( 50 );
 	mainStyle->setBgGradColor( LV_COLOR_NAVY );
 	mainStyle->setBgGradDir( LV_GRAD_DIR_VER );
+	mainStyle->setTextColor( LV_COLOR_WHITE );
+	mainStyle->seTexttFont( &lv_font_montserrat_28 );
 
+#if 0
 	lv_obj_add_style( lv_scr_act(), LV_OBJ_PART_MAIN, mainStyle->getStyle() );
 
 	selectorStyle = new Style();
@@ -319,14 +274,13 @@ void setup(){
 	selectorStyle->setBorderColor( LV_COLOR_BLACK );
 	selectorStyle->setImageRecolor( LV_COLOR_SILVER );
 	
-	production = new figure( LV_SYMBOL_HOME, selectorStyle, LV_ALIGN_IN_TOP_RIGHT );
-	consommation = new figure( LV_SYMBOL_CHARGE, selectorStyle, LV_ALIGN_OUT_BOTTOM_MID, production );
-	pump = new figure( LV_SYMBOL_SETTINGS, selectorStyle, LV_ALIGN_OUT_BOTTOM_MID, consommation );
 #endif
 
 	tv = new TabView( lv_scr_act() );	// Create the TabView
-	production = new PTab( tv->AddTab( LV_SYMBOL_HOME " Production" ), LV_SYMBOL_HOME " ", 0, "Production" );
-	consommation = new PTab( tv->AddTab( LV_SYMBOL_CHARGE " Consommation" ), LV_SYMBOL_CHARGE " ", 1, "Consommation" );
+	tv->addStyle( mainStyle );
+
+	production = new PTab( tv->AddTab( LV_SYMBOL_HOME " Prod" ), LV_SYMBOL_HOME " ", 0, "Production" );
+	consommation = new PTab( tv->AddTab( LV_SYMBOL_CHARGE " Consn" ), LV_SYMBOL_CHARGE " ", 1, "Consommation" );
 	pump = new PTab( tv->AddTab( LV_SYMBOL_SETTINGS " Pompe" ), LV_SYMBOL_SETTINGS " ", 2, "Pompe" );
 
 
