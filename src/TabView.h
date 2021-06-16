@@ -35,6 +35,43 @@ public:
 	 	return lv_tabview_add_tab( this->getMyself(), name );
 	 }
 
+	/* Change tab name
+	 * -> uint16_t id : index to change
+	 * -> char *name
+	 */
+	void setTabName( uint16_t id, char *name ){
+		lv_tabview_set_tab_name( this->getMyself(), id, name );
+	}
+
+	/* Delete all children of a tab
+	 */
+	void DeleteChilds( void ){
+		lv_tabview_clean_tab( this->getMyself() );
+	}
+	void Clean( void ){
+		lv_tabview_clean_tab( this->getMyself() );
+	}
+
+	/* Set active tab
+	 * -> uint16_t id : index of the tab to become active
+	 * -> lv_anim_enable_t anim : animation to be done ?
+	 *  	LV_ANIM_ON : yes (default)
+	 *  	LV_ANIM_OFF : no
+	 */
+	void setActiveTab( uint16_t id, lv_anim_enable_t anim = LV_ANIM_ON ){
+		lv_tabview_set_tab_act( this->getMyself(), id, anim );
+	}
+	uint16_t getActiveTab( void ){
+		return lv_tabview_get_tab_act( this->getMyself() );
+	}
+
+	/* set Button position
+	 * -> lv_tabview_btns_pos_t btns_pos : button position
+	 */
+	void setButtonPosition( lv_tabview_btns_pos_t btns_pos ){
+		return lv_tabview_set_btns_pos( this->getMyself(), btns_pos );
+	}
+
 	/* Flash if an edge is reached
 	 * -> bool : true flash, false don't flash
 	 */
