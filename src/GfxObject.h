@@ -170,6 +170,15 @@ public:
 		lv_obj_set_style_local_text_font( this->getMyself(), part, state, font );
 	}
 
+	/* Set text color
+	 * -> lv_color_t color
+	 * -> uint8_t part (default : LV_OBJ_PART_MAIN)
+	 * -> uint8_t state (default : LV_STATE_DEFAULT)
+	 */
+	void setTextColor( lv_color_t color, uint8_t part = LV_OBJ_PART_MAIN, uint8_t state=LV_STATE_DEFAULT ){
+		lv_obj_set_style_local_text_color( this->getMyself(), part, state, color );
+	}
+
 	/* Set padding 
 	 * -> pad : all directions
 	 * -> h,v: horizontal and vertical
