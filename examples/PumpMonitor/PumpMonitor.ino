@@ -257,6 +257,7 @@ void setup(){
 	mainStyle->setTextColor( LV_COLOR_WHITE );
 	mainStyle->seTexttFont( &lv_font_montserrat_28 );
 
+
 #if 0
 	lv_obj_add_style( lv_scr_act(), LV_OBJ_PART_MAIN, mainStyle->getStyle() );
 
@@ -278,6 +279,12 @@ void setup(){
 
 	tv = new TabView( lv_scr_act() );	// Create the TabView
 	tv->addStyle( mainStyle );
+	tv->setBgColor( LV_COLOR_NAVY, LV_TABVIEW_PART_TAB_BG );
+	tv->setBgGradColor( LV_COLOR_BLACK, LV_TABVIEW_PART_TAB_BG );
+	tv->setBgGradDir( LV_GRAD_DIR_VER, LV_TABVIEW_PART_TAB_BG );
+	tv->setTextColor( LV_COLOR_SILVER, LV_TABVIEW_PART_TAB_BG  );
+	tv->seTexttFont( &lv_font_montserrat_22, LV_TABVIEW_PART_TAB_BG );
+	tv->setTextColor( LV_COLOR_YELLOW, LV_TABVIEW_PART_TAB_BTN, LV_STATE_CHECKED );
 
 	production = new PTab( tv->AddTab( LV_SYMBOL_HOME " Prod" ), LV_SYMBOL_HOME " ", 0, "Production" );
 	consommation = new PTab( tv->AddTab( LV_SYMBOL_CHARGE " Consn" ), LV_SYMBOL_CHARGE " ", 1, "Consommation" );
