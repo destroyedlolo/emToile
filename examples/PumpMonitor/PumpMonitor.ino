@@ -83,17 +83,12 @@ public :
 		 */
 	PTab( lv_obj_t *np, const char * const aicn, uint16_t aidx, const char *atitle, uint16_t amax ) : 
 	Page( np, true ), icn(aicn), id(aidx) {
-#if 0
-		this->title = new Label( **this );
-		this->title->Align( LV_ALIGN_IN_TOP_MID );	// in the middle of the page
-		this->title->AutoRealign( true );		// to ensure the alignment is correct
-		this->title->setTextStatic( atitle );
-#endif
+		this->SetScrollbarMode( LV_SCRLBAR_MODE_OFF );
 
 		this->chart = new Chart( 30, **this );
 		this->chart->setSize( lv_obj_get_width( **this ) - 20, lv_obj_get_height( **this ) - 20 );
 		this->chart->Align( LV_ALIGN_CENTER );
-		this->chart->setBgOpacity( LV_OPA_20 );
+		this->chart->setBgOpacity( LV_OPA_10 );
 		this->chart->setCaptionFont( &lv_font_montserrat_28 );
 		this->chart->setCaptionAlign( LV_ALIGN_IN_TOP_MID );
 		this->chart->setCaptionColor( LV_COLOR_WHITE );
