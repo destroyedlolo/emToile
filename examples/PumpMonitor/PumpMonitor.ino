@@ -18,6 +18,7 @@
 
 #include <TabView.h>
 #include <Page.h>
+#include <Chart.h>
 #include <Label.h>
 
 
@@ -64,6 +65,9 @@ Style *selectorStyle;
 	/* Tab to display power usage */
 class PTab : public Page {
 	Label *title;
+	Chart *chart;
+	Chart::Serie *serie;
+
 	const char *icn;
 	String tab_title;
 	uint16_t id;
@@ -74,14 +78,29 @@ public :
 		 * lv_obj_t *np : new page object pointer from TileView
 		 * const char * const icon	: icon to add to the tab name, including space
 		 * uint16_t aidx : index in the tabview
+		 * uint16_t max : maximum value
 		 * const char *title
 		 */
-	PTab( lv_obj_t *np, const char * const aicn, uint16_t aidx, const char *atitle ) : 
+	PTab( lv_obj_t *np, const char * const aicn, uint16_t aidx, const char *atitle, uint16_t amax ) : 
 	Page( np, true ), icn(aicn), id(aidx) {
+#if 0
 		this->title = new Label( **this );
 		this->title->Align( LV_ALIGN_IN_TOP_MID );	// in the middle of the page
 		this->title->AutoRealign( true );		// to ensure the alignment is correct
 		this->title->setTextStatic( atitle );
+#endif
+
+		this->chart = new Chart( 30, **this );
+		this->chart->setSize( lv_obj_get_width( **this ) - 20, lv_obj_get_height( **this ) - 20 );
+		this->chart->Align( LV_ALIGN_CENTER );
+		this->chart->setBgOpacity( LV_OPA_20 );
+		this->chart->setCaptionFont( &lv_font_montserrat_28 );
+		this->chart->setCaptionAlign( LV_ALIGN_IN_TOP_MID );
+		this->chart->setCaptionColor( LV_COLOR_WHITE );
+		this->chart->setCaptionString( atitle );
+
+		this->serie = this->chart->addSerie( LV_COLOR_RED );
+		this->serie->setRange( 0, amax );
 	}
 
 		/* Change the title as per received value */
@@ -90,6 +109,8 @@ public :
 		this->tab_title += val;
 
 		tv->setTabName( this->id, (char *)this->tab_title.c_str() );
+
+		this->serie->Insert( atoi(val) );
 	}
 };
 
@@ -259,18 +280,20 @@ void setup(){
 
 	tv = new TabView( lv_scr_act() );	// Create the TabView
 	tv->addStyle( mainStyle );
+
+		/* Add styles to tab */
 	tv->setBgColor( LV_COLOR_NAVY, LV_TABVIEW_PART_TAB_BG );
 	tv->setBgGradColor( LV_COLOR_BLACK, LV_TABVIEW_PART_TAB_BG );
 	tv->setBgGradDir( LV_GRAD_DIR_VER, LV_TABVIEW_PART_TAB_BG );
-	tv->setTextColor( LV_COLOR_SILVER, LV_TABVIEW_PART_TAB_BG  );
 	tv->seTexttFont( &lv_font_montserrat_22, LV_TABVIEW_PART_TAB_BG );
-	tv->setPadding( 5,5,5,5, LV_TABVIEW_PART_TAB_BTN  );
-	tv->setTextColor( LV_COLOR_YELLOW, LV_TABVIEW_PART_TAB_BTN, LV_STATE_CHECKED );
+	tv->setTextColor( LV_COLOR_SILVER, LV_TABVIEW_PART_TAB_BG  );	// Unselected tab
+	tv->setPadding( 5,5,5,5, LV_TABVIEW_PART_TAB_BTN  );	// Reduce space took
+	tv->setTextColor( LV_COLOR_YELLOW, LV_TABVIEW_PART_TAB_BTN, LV_STATE_CHECKED ); // Selected tab
 
-	production = new PTab( tv->AddTab( LV_SYMBOL_HOME " Prod" ), LV_SYMBOL_HOME " ", 0, "Production" );
-	consommation = new PTab( tv->AddTab( LV_SYMBOL_CHARGE " Consn" ), LV_SYMBOL_CHARGE " ", 1, "Consommation" );
-	pump = new PTab( tv->AddTab( LV_SYMBOL_SETTINGS " Pompe" ), LV_SYMBOL_SETTINGS " ", 2, "Pompe" );
-
+		/* Create tab's pages */
+	production = new PTab( tv->AddTab( LV_SYMBOL_HOME " Prod" ), LV_SYMBOL_HOME " ", 0, "Production", 2000 );
+	consommation = new PTab( tv->AddTab( LV_SYMBOL_CHARGE " Consn" ), LV_SYMBOL_CHARGE " ", 1, "Consommation", 8000 );
+	pump = new PTab( tv->AddTab( LV_SYMBOL_SETTINGS " Pompe" ), LV_SYMBOL_SETTINGS " ", 2, "Pompe", 700 );
 
 		/****
 		* Network
