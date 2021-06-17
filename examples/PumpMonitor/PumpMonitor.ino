@@ -66,11 +66,14 @@ Style *selectorStyle;
 class PTab : public Page {
 	Label *title;
 	Chart *chart;
-	Chart::Serie *serie;
+	Chart::Serie *serie, *seriemnt;
 
 	const char *icn;
 	String tab_title;
 	uint16_t id;
+
+	int colmax;
+	uint8_t colcnt;
 
 public :
 	
@@ -82,10 +85,10 @@ public :
 		 * const char *title
 		 */
 	PTab( lv_obj_t *np, const char * const aicn, uint16_t aidx, const char *atitle, uint16_t amax ) : 
-	Page( np, true ), icn(aicn), id(aidx) {
+	Page( np, true ), icn(aicn), id(aidx), colmax(-1), colcnt(0) {
 		this->SetScrollbarMode( LV_SCRLBAR_MODE_OFF );
 
-		this->chart = new Chart( 30, **this );
+		this->chart = new Chart( 60, **this );
 		this->chart->setSize( lv_obj_get_width( **this ) - 20, lv_obj_get_height( **this ) - 20 );
 		this->chart->Align( LV_ALIGN_CENTER );
 		this->chart->setBgOpacity( LV_OPA_10 );
@@ -96,16 +99,33 @@ public :
 
 		this->serie = this->chart->addSerie( LV_COLOR_RED );
 		this->serie->setRange( 0, amax );
+
+		this->seriemnt = this->chart->addSerie( LV_COLOR_GREEN );
+		this->seriemnt->setRange( 0, amax );
 	}
 
 		/* Change the title as per received value */
 	void setText( const char *val ){
+		int v;
+
 		this->tab_title = icn;
 		this->tab_title += val;
 
 		tv->setTabName( this->id, (char *)this->tab_title.c_str() );
 
-		this->serie->Insert( atoi(val) );
+		this->serie->Insert( v = atoi(val) );
+
+		if( this->colmax == -1 ){	// First value ever
+			this->colmax = v;
+			this->serie->setRange( 0, (v < 50) ? 50 : v );
+		} else if( !(++this->colcnt % 60 ) ){
+			this->seriemnt->Insert( this->colmax );
+			this->colmax = v;
+			this->serie->setRange( 0, (v < 50) ? 50 : v );
+		} else if( v > this->colmax ){
+			this->colmax = v;
+			this->serie->setRange( 0, (v < 50) ? 50 : v );
+		}
 	}
 };
 
