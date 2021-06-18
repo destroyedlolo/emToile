@@ -56,5 +56,14 @@ public:
 	void setLongTextMode( lv_label_long_mode_t mode ){
 		lv_label_set_long_mode( this->getMyself(), mode );
 	}
+
+		/* Set align text inside the lable.
+		 *
+		 * Notez-bien : to make it working, the size of the label must
+		 * be fix, so setLongTextMode( LV_LABEL_LONG_BREAK );
+		 */
+	void textAlign( lv_label_align_t align ){
+		lv_label_set_align( this->getMyself(), align );
+	}
 };
 #endif

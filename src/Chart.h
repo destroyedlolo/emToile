@@ -84,6 +84,14 @@ public:
 			lv_chart_set_next( this->_chart, this->_dt, val );
 		}
 
+		/* Get the number of values in the collection
+		 *
+		 * <- uint16_t : number of entries
+		 */
+		uint16_t HowMany( void ){
+			return lv_chart_get_point_count( this->_chart );
+		}
+
 		/* Set a value from its index
 		 *
 		 * -> lv_coord_t val,
