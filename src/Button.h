@@ -16,6 +16,10 @@ public:
 	 *	-> Container *parent : parent object (default : NULL)
 	 *  	if not null, its style is copied
 	 */
+	Button( lv_obj_t *parent=NULL, const lv_obj_t *cloned=NULL ){
+		this->_obj = lv_btn_create( parent, cloned );
+	}
+
 	Button( Container *parent, Container *cloned=NULL );
 	Button( Style *, Container *parent, Container *cloned=NULL );
 
