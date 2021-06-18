@@ -66,7 +66,7 @@ Style *selectorStyle;
 class PTab : public Page {
 	Label *title;
 	Chart *chart;
-	Chart::Serie *serie, *seriemnt;
+	Chart::Serie *serie, *serie_lt;
 
 	const char *icn;
 	String tab_title;
@@ -74,6 +74,21 @@ class PTab : public Page {
 
 	int colmax;
 	uint8_t colcnt;
+
+	void updRange( void ){
+		int max_lt = -1;
+
+		for( uint16_t i=0; i<serie_lt->HowMany(); i++){
+			int v = serie_lt->Get( i );
+			if( v > max_lt )
+				max_lt = v;
+		}
+
+		if( this->colmax > max_lt )
+			max_lt = this->colmax;
+
+		this->serie->setRange( 0, max_lt < 50 ? 50 :  max_lt );
+	}
 
 public :
 	
@@ -84,7 +99,7 @@ public :
 		 * uint16_t max : maximum value
 		 * const char *title
 		 */
-	PTab( lv_obj_t *np, const char * const aicn, uint16_t aidx, const char *atitle, uint16_t amax ) : 
+	PTab( lv_obj_t *np, const char * const aicn, uint16_t aidx, const char *atitle ) : 
 	Page( np, true ), icn(aicn), id(aidx), colmax(-1), colcnt(0) {
 		this->SetScrollbarMode( LV_SCRLBAR_MODE_OFF );
 
@@ -98,10 +113,7 @@ public :
 		this->chart->setCaptionString( atitle );
 
 		this->serie = this->chart->addSerie( LV_COLOR_RED );
-		this->serie->setRange( 0, amax );
-
-		this->seriemnt = this->chart->addSerie( LV_COLOR_GREEN );
-		this->seriemnt->setRange( 0, amax );
+		this->serie_lt = this->chart->addSerie( LV_COLOR_GREEN );
 	}
 
 		/* Change the title as per received value */
@@ -117,14 +129,14 @@ public :
 
 		if( this->colmax == -1 ){	// First value ever
 			this->colmax = v;
-			this->serie->setRange( 0, (v < 50) ? 50 : v );
+			this->updRange();
 		} else if( !(++this->colcnt % 60 ) ){
-			this->seriemnt->Insert( this->colmax );
+			this->serie_lt->Insert( this->colmax );
 			this->colmax = v;
-			this->serie->setRange( 0, (v < 50) ? 50 : v );
+			this->updRange();
 		} else if( v > this->colmax ){
 			this->colmax = v;
-			this->serie->setRange( 0, (v < 50) ? 50 : v );
+			this->updRange();
 		}
 	}
 };
@@ -306,9 +318,9 @@ void setup(){
 	tv->setTextColor( LV_COLOR_YELLOW, LV_TABVIEW_PART_TAB_BTN, LV_STATE_CHECKED ); // Selected tab
 
 		/* Create tab's pages */
-	production = new PTab( tv->AddTab( LV_SYMBOL_HOME " Prod" ), LV_SYMBOL_HOME " ", 0, "Production", 2000 );
-	consommation = new PTab( tv->AddTab( LV_SYMBOL_CHARGE " Consn" ), LV_SYMBOL_CHARGE " ", 1, "Consommation", 8000 );
-	pump = new PTab( tv->AddTab( LV_SYMBOL_SETTINGS " Pompe" ), LV_SYMBOL_SETTINGS " ", 2, "Pompe", 700 );
+	production = new PTab( tv->AddTab( LV_SYMBOL_HOME " Prod" ), LV_SYMBOL_HOME " ", 0, "Production" );
+	consommation = new PTab( tv->AddTab( LV_SYMBOL_CHARGE " Consn" ), LV_SYMBOL_CHARGE " ", 1, "Consommation" );
+	pump = new PTab( tv->AddTab( LV_SYMBOL_SETTINGS " Pompe" ), LV_SYMBOL_SETTINGS " ", 2, "Pompe" );
 
 		/****
 		* Network
