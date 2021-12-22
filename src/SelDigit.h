@@ -20,6 +20,11 @@ class SelDigit : public Container {
 	uint8_t val;
 	uint8_t min;
 	uint8_t max;
+
+	void incVal( lv_obj_t *, lv_event_t event ){
+		Serial.print("inc");
+	}
+
 public:
 	/* SelDigit's constructor
 	 *	-> Container *parent : parent object (default : NULL)
@@ -46,6 +51,22 @@ public:
 	}
 
 	void setValue( uint8_t v );
+
+	/******
+	 * Event handler
+	 * Unfortunately, LVGL's callback can't be an object method.
+	 * So the workaround is to have an external function that dispatch
+	 * to objects. See SelDigit.cpp example.
+	 ******/
+
+		/* Attach an event handler */
+	void attachEventHandler( lv_event_cb_t );
+
+		/* an event has been received
+		 * <- true if the event has been treaded
+		 * <- false if the event doesn't concern this object
+		 */
+	bool dispatchEvent( lv_obj_t *, lv_event_t );
 };
 
 #endif
