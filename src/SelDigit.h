@@ -36,6 +36,13 @@ public:
 		SelDigit( parent, cloned )
 	{
 		this->addStyle( style );
+		this->incButton->addStyle( style );
+		this->decButton->addStyle( style );
+	}
+
+	void setButtonStyle( Style *style ){
+		this->incButton->addStyle( style );
+		this->decButton->addStyle( style );
 	}
 
 	/* Limit for this field 
@@ -54,7 +61,7 @@ public:
 
 	/******
 	 * Event handler
-	 * Unfortunately, LVGL's callback can't be an object method.
+	 * Unfortunately, LVGL's callback can't be an object's method.
 	 * So the workaround is to have an external function that dispatch
 	 * to objects. See SelDigit.cpp example.
 	 ******/
